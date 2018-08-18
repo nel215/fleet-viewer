@@ -23,7 +23,6 @@ function handleMessage(message) {
   console.log(body);
   if (url.pathname === '/kcsapi/api_get_member/questlist') {
     QuestStore.updateQuests(body);
-    console.log(QuestStore.state);
   }
   if (url.pathname === '/kcsapi/api_port/port') {
     portAction.execute(body);
