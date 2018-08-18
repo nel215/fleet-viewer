@@ -7,6 +7,9 @@
     "webRequestBlocking",
     "http://203.104.209.55/*"
   ],
+  "browser_action": {
+    "default_title": "Fleet Viewer"
+  },
   "background": {
     "scripts": ["background.js"]
   },
