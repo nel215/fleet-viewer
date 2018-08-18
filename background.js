@@ -46,6 +46,6 @@ browser.webRequest.onBeforeRequest.addListener(function(details){
 browser.browserAction.onClicked.addListener((tab) => {
   browser.windows.create({
     type: 'panel',
-    url: '/index.html',
+    url: '/dist/index.html',
   });
 });
