@@ -5,7 +5,8 @@
   "author": "nel215",
   "license": "Apache-2.0",
   "scripts": {
-    "dev": "webpack --config webpack.config.js"
+    "dev": "webpack --config webpack.config.js",
+    "build": "webpack --config webpack.config.js --mode production"
   },
   "devDependencies": {
     "babel": "^6.23.0",
