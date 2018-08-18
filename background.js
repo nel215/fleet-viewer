@@ -30,8 +30,8 @@ browser.webRequest.onBeforeRequest.addListener(function(details){
     try {
       for (name in ports) {
         ports[name].postMessage({
-          'body': body,
-          'url': details.url,
+          body: body,
+          url: details.url,
         });
       }
     } catch (e) {
