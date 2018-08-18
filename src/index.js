@@ -1,7 +1,23 @@
+import URL from 'url';
 import uuid from 'uuid/v4';
+import assert from 'assert';
+
+import QuestStore from './store/quest';
+
+function parseBody(body) {
+  assert(body.search(/^svdata=/) === 0);
+  return JSON.parse(body.substr(7));
+}
 
 function handleMessage(message) {
-  console.log(message);
+  const url = URL.parse(message.url);
+  const body = parseBody(message.body);
+  console.log(url);
+  console.log(body);
+  if (url.pathname === '/kcsapi/api_get_member/questlist') {
+    QuestStore.updateQuests(body);
+    console.log(QuestStore.state);
+  }
 }
 const port = browser.runtime.connect({
   name: uuid(),
