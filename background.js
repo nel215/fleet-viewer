@@ -1,7 +1,11 @@
-const ports = []
+const ports = {}
 function handleConnect(port) {
   console.log('port added', port);
-  ports.push(port);
+  ports[port.name] = port;
+  port.onDisconnect.addListener((p)=> {
+    console.log('port deleted', p);
+    delete ports[p.name];
+  });
 }
 browser.runtime.onConnect.addListener(handleConnect);
 
@@ -24,12 +28,12 @@ browser.webRequest.onBeforeRequest.addListener(function(details){
   filter.onstop = event => {
     console.log("finished");
     try {
-      ports.forEach((port) => {
-        port.postMessage({
+      for (name in ports) {
+        ports[name].postMessage({
           'body': body,
           'url': details.url,
         });
-      });
+      }
     } catch (e) {
       console.log(e);
     }

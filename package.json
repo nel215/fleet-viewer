@@ -23,5 +23,8 @@
     "prettier": "^1.14.2",
     "webpack": "^4.16.5",
     "webpack-cli": "^3.1.0"
+  },
+  "dependencies": {
+    "uuid": "^3.3.2"
   }
 }
