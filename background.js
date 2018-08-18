@@ -1,3 +1,10 @@
+const ports = []
+function handleConnect(port) {
+  console.log('port added', port);
+  ports.push(port);
+}
+browser.runtime.onConnect.addListener(handleConnect);
+
 browser.webRequest.onBeforeRequest.addListener(function(details){
   let filter = browser.webRequest.filterResponseData(details.requestId);
   let decoder = new TextDecoder("utf-8");
@@ -16,7 +23,15 @@ browser.webRequest.onBeforeRequest.addListener(function(details){
 
   filter.onstop = event => {
     console.log("finished");
-    console.log(body);
+    try {
+      ports.forEach((port) => {
+        port.postMessage({
+          'body': body,
+        });
+      });
+    } catch (e) {
+      console.log(e);
+    }
     filter.disconnect();
   }
 }, {
@@ -26,3 +41,10 @@ browser.webRequest.onBeforeRequest.addListener(function(details){
   'blocking',
 ]
 );
+
+browser.browserAction.onClicked.addListener((tab) => {
+  browser.windows.create({
+    type: 'panel',
+    url: '/index.html',
+  });
+});
