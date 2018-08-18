@@ -1,6 +1,6 @@
 <template>
   <ul>
-    <li v-for="quest in questStore.state.quests">
+    <li v-for="quest in quests">
       {{ quest.title }}
     </li>
   </ul>

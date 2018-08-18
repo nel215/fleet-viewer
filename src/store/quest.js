@@ -2,12 +2,10 @@ import Vue from 'vue';
 
 
 const QuestStore = {
-  state: {
-    quests: {},
-  },
+  quests: {},
   updateQuests(body) {
     body.api_data.api_list.forEach((q) => {
-      Vue.set(this.state.quests, q.api_no, {
+      Vue.set(this.quests, q.api_no, {
         id: q.api_no,
         title: q.api_title,
         detail: q.api_detail,
