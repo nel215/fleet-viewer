@@ -5,7 +5,7 @@ import assert from 'assert';
 
 import PortAction from './action/port';
 import QuestStore from './store/quest';
-import ShipView from './view/ship';
+import AppView from './view/app.vue';
 
 import './stylus/index.styl';
 
@@ -36,5 +36,5 @@ port.onMessage.addListener(handleMessage);
 
 const vm = new Vue({
   el: '#app',
-  render: h => h(ShipView),
+  render: h => h(AppView),
 });
