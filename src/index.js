@@ -7,6 +7,8 @@ import PortAction from './action/port';
 import QuestStore from './store/quest';
 import ShipView from './view/ship';
 
+import './stylus/index.styl';
+
 function parseBody(body) {
   assert(body.search(/^svdata=/) === 0);
   return JSON.parse(body.substr(7));
