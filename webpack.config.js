@@ -1,8 +1,12 @@
 const path = require('path');
+const VueLoaderPlugin = require('vue-loader/lib/plugin');
 
 module.exports = {
   mode: 'development',
   devtool: 'cheap-module-source-map',
+  plugins: [
+    new VueLoaderPlugin(),
+  ],
   entry: [
     'babel-polyfill',
     path.resolve('src', 'index.js')
@@ -18,10 +22,14 @@ module.exports = {
         exclude: /node_modules/,
         loader: 'babel-loader',
       },
+      {
+        test: /\.vue$/,
+        loader: 'vue-loader',
+      },
     ]
   },
   resolve: {
-    extensions: ['.js', 'json', 'jsx'],
+    extensions: ['.js', '.vue'],
     alias: {
       vue$: 'vue/dist/vue.esm.js',
     },
