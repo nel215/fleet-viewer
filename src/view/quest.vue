@@ -5,16 +5,6 @@
     </li>
   </ul>
 </template>
-<script>
-import QuestStore from '../store/quest';
-
-export default {
-  data: function() {
-    return {
-      questStore: QuestStore,
-    };
-  },
-}
-</script>
+<script src='./quest.js'></script>
 <style>
 </style>
