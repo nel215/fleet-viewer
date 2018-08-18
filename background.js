@@ -27,6 +27,7 @@ browser.webRequest.onBeforeRequest.addListener(function(details){
       ports.forEach((port) => {
         port.postMessage({
           'body': body,
+          'url': details.url,
         });
       });
     } catch (e) {
