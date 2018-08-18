@@ -3,13 +3,16 @@ import URL from 'url';
 import uuid from 'uuid/v4';
 import assert from 'assert';
 
+import PortAction from './action/port';
 import QuestStore from './store/quest';
-import QuestView from './view/quest';
+import ShipView from './view/ship';
 
 function parseBody(body) {
   assert(body.search(/^svdata=/) === 0);
   return JSON.parse(body.substr(7));
 }
+
+const portAction = new PortAction();
 
 function handleMessage(message) {
   const url = URL.parse(message.url);
@@ -20,6 +23,9 @@ function handleMessage(message) {
     QuestStore.updateQuests(body);
     console.log(QuestStore.state);
   }
+  if (url.pathname === '/kcsapi/api_port/port') {
+    portAction.execute(body);
+  }
 }
 const port = browser.runtime.connect({
   name: uuid(),
@@ -28,5 +34,5 @@ port.onMessage.addListener(handleMessage);
 
 const vm = new Vue({
   el: '#app',
-  render: h => h(QuestView),
+  render: h => h(ShipView),
 });

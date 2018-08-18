@@ -6,3 +6,5 @@ const ShipStore = {
     Vue.set(this.ships, ship.id, ship);
   }
 }
+
+export default ShipStore;
