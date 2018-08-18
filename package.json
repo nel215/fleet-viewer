@@ -1,0 +1,7 @@
+{
+  "name": "fleet-viewer",
+  "version": "0.0.1",
+  "main": "index.js",
+  "author": "nel215",
+  "license": "Apache-2.0"
+}
