@@ -2,6 +2,7 @@ import URL from 'url';
 import uuid from 'uuid/v4';
 import assert from 'assert';
 import QuestStore from './quest';
+import API from '../api';
 
 function parseShip(data) {
   return {
@@ -40,6 +41,9 @@ export default {
           body,
         });
       }
+      if (url.pathname === '/kcsapi/api_get_member/ship_deck') {
+        context.dispatch(API.createAction(body));
+      }
     });
   },
   handlePort(context, payload) {
@@ -50,5 +54,9 @@ export default {
     }));
     context.commit('updateShips', { ships });
     context.commit('updateDecks', { decks });
+  },
+  handleShipDeck(context, payload) {
+    console.log(payload);
+    context.commit('updateShips', { ships: payload.ships });
   },
 };
