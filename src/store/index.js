@@ -1,5 +1,6 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
+
 Vue.use(Vuex);
 
 function parseShip(data) {
@@ -13,7 +14,7 @@ function parseShip(data) {
     bull: data.api_bull,
     cond: data.api_cond,
     slot: data.api_slot,
-  }
+  };
 }
 
 const store = new Vuex.Store({
@@ -27,7 +28,7 @@ const store = new Vuex.Store({
         Vue.set(state.ships, ship.id, ship);
       }
     },
-    updateDecks (state, payload) {
+    updateDecks(state, payload) {
       for (const deck of payload.decks) {
         Vue.set(state.decks, deck.id, deck);
       }
@@ -46,8 +47,8 @@ const store = new Vuex.Store({
           ship_ids: d.api_ship,
         });
       }
-      context.commit('updateShips', { ships: ships});
-      context.commit('updateDecks', { decks: decks });
+      context.commit('updateShips', { ships });
+      context.commit('updateDecks', { decks });
     },
   },
 });
