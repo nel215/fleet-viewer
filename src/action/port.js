@@ -1,4 +1,3 @@
-import ShipStore from '../store/ship';
 
 function parseShip(data) {
   return {
@@ -16,7 +15,7 @@ function parseShip(data) {
 
 class PortAction {
   constructor(opt={}) {
-    this.shipStore = opt.shipStore || ShipStore;
+    this.shipStore = opt.shipStore;
   }
   execute(body) {
     body.api_data.api_ship.forEach((d) => {

@@ -6,6 +6,7 @@ import assert from 'assert';
 import PortAction from './action/port';
 import QuestStore from './store/quest';
 import AppView from './view/app.vue';
+import store from './store/index.js';
 
 import './stylus/index.styl';
 
@@ -25,7 +26,9 @@ function handleMessage(message) {
     QuestStore.updateQuests(body);
   }
   if (url.pathname === '/kcsapi/api_port/port') {
-    portAction.execute(body);
+    store.dispatch('handlePort', {
+      body: body,
+    });
   }
 }
 const port = browser.runtime.connect({
@@ -35,5 +38,6 @@ port.onMessage.addListener(handleMessage);
 
 const vm = new Vue({
   el: '#app',
+  store,
   render: h => h(AppView),
 });
