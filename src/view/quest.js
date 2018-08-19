@@ -14,6 +14,11 @@ export default {
         }
         selected.push(quest);
       });
+      while (selected.length < 6) {
+        selected.push({
+          title: '-',
+        });
+      }
       console.log(selected);
       return selected;
     },
