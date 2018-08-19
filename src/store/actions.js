@@ -43,17 +43,11 @@ export default {
     });
   },
   handlePort(context, payload) {
-    const ships = [];
-    const decks = [];
-    for (const d of payload.body.api_data.api_ship) {
-      ships.push(parseShip(d));
-    }
-    for (const d of payload.body.api_data.api_deck_port) {
-      decks.push({
-        id: d.api_id,
-        ship_ids: d.api_ship,
-      });
-    }
+    const ships = payload.body.api_data.api_ship.map(d => parseShip(d));
+    const decks = payload.body.api_data.api_deck_port.map(d => ({
+      id: d.api_id,
+      ship_ids: d.api_ship,
+    }));
     context.commit('updateShips', { ships });
     context.commit('updateDecks', { decks });
   },

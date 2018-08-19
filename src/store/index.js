@@ -11,14 +11,14 @@ const store = new Vuex.Store({
   },
   mutations: {
     updateShips(state, payload) {
-      for (const ship of payload.ships) {
+      payload.ships.forEach((ship) => {
         Vue.set(state.ships, ship.id, ship);
-      }
+      });
     },
     updateDecks(state, payload) {
-      for (const deck of payload.decks) {
+      payload.decks.forEach((deck) => {
         Vue.set(state.decks, deck.id, deck);
-      }
+      });
     },
   },
   actions,
