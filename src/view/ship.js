@@ -1,24 +1,22 @@
 import Vuex from 'vuex';
 
 export default {
-  data: function() {
+  data() {
     return {};
   },
   computed: Vuex.mapState({
     deckShips(state) {
-      const deckShips = [];
-      for (const deck_id in state.decks) {
-        const deck = state.decks[deck_id];
+      const deckShips = Object.values(state.decks).map((deck) => {
         const ships = [];
-        for (const ship_id of deck.ship_ids) {
-          if (ship_id == -1) {
-            continue;
+        deck.ship_ids.forEach((shipId) => {
+          if (shipId === -1) {
+            return;
           }
-          ships.push(state.ships[ship_id]);
-        }
-        deckShips.push(ships);
-      }
+          ships.push(state.ships[shipId]);
+        });
+        return ships;
+      });
       return deckShips;
     },
   }),
-}
+};
