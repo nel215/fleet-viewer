@@ -9,7 +9,7 @@
         <th class="mdl-data-table__cell--non-numeric">Title</th>
       </thead>
       <tr v-for="quest in selectedQuests">
-        <td>{{ quest.title }}</td>
+        <td class="mdl-data-table__cell--non-numeric">{{ quest.title }}</td>
       </tr>
     </table>
   </div>
