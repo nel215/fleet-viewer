@@ -9,38 +9,54 @@ function handleConnect(port) {
 }
 browser.runtime.onConnect.addListener(handleConnect);
 
-browser.webRequest.onBeforeRequest.addListener(
-  (details) => {
-    const filter = browser.webRequest.filterResponseData(details.requestId);
-    const decoder = new TextDecoder('utf-8');
-    let body = '';
-    console.log(details);
+function handleBeforeRequest(details) {
+  const filter = browser.webRequest.filterResponseData(details.requestId);
+  const decoder = new TextDecoder('utf-8');
+  let body = '';
+  console.log(details);
 
-    filter.onstart = () => {
-      console.log('started');
-    };
+  filter.onstart = () => {
+    console.log('started');
+  };
 
-    filter.ondata = (event) => {
-      const str = decoder.decode(event.data);
-      body += str;
-      filter.write(event.data);
-    };
+  filter.ondata = (event) => {
+    const str = decoder.decode(event.data);
+    body += str;
+    filter.write(event.data);
+  };
 
-    filter.onstop = () => {
-      console.log('finished');
-      try {
+  filter.onstop = () => {
+    console.log('finished');
+    try {
+      if (details.url.endsWith('/kcsapi/api_start2/getData')) {
+        browser.storage.local.set({ master: body }).then(
+          () => {
+            console.log('set master');
+            filter.disconnect();
+          },
+          (e) => {
+            console.log(e);
+            filter.disconnect();
+          },
+        );
+      } else {
         for (name in ports) {
           ports[name].postMessage({
             body,
             url: details.url,
           });
         }
-      } catch (e) {
-        console.log(e);
+        filter.disconnect();
       }
+    } catch (e) {
+      console.log(e);
       filter.disconnect();
-    };
-  },
+    }
+  };
+}
+
+browser.webRequest.onBeforeRequest.addListener(
+  handleBeforeRequest,
   {
     urls: ['http://203.104.209.55/*'],
     types: ['xmlhttprequest'],

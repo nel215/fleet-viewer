@@ -3,6 +3,7 @@
   "version": "0.0.1",
   "description": "",
   "permissions": [
+    "storage",
     "webRequest",
     "webRequestBlocking",
     "http://203.104.209.55/*"
