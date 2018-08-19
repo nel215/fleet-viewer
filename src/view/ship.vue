@@ -1,10 +1,10 @@
 <template>
-<div class="mdl-card">
+<div>
   <div class="mdl-card__title">
     <h6 class="mdl-card__title-text">Fleets</h6>
   </div>
   <div class= "mdl-card__supporting-text" v-for="deck in deckShips">
-    <table class="mdl-data-table mdl-shadow--2dp">
+    <table class="mdl-data-table">
       <thead>
         <th class="mdl-data-table__cell--non-numeric">Name</th>
         <th class="mdl-data-table__cell--non-numeric">LV</th>

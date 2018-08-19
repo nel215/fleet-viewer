@@ -1,9 +1,19 @@
 <template>
-  <ul>
-    <li v-for="quest in selectedQuests">
-      {{ quest.title }}
-    </li>
-  </ul>
+<div>
+  <div class="mdl-card__title">
+    <h6 class="mdl-card__title-text">Mission</h6>
+  </div>
+  <div class= "mdl-card__supporting-text">
+    <table class="mdl-data-table">
+      <thead>
+        <th class="mdl-data-table__cell--non-numeric">Title</th>
+      </thead>
+      <tr v-for="quest in selectedQuests">
+        <td>{{ quest.title }}</td>
+      </tr>
+    </table>
+  </div>
+</div>
 </template>
 <script src='./quest.js'></script>
 <style>
