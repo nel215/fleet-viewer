@@ -1,7 +1,6 @@
 import URL from 'url';
 import uuid from 'uuid/v4';
 import assert from 'assert';
-import QuestStore from './quest';
 import API from '../api';
 
 function parseShip(data) {
@@ -34,7 +33,9 @@ export default {
       console.log(url);
       console.log(body);
       if (url.pathname === '/kcsapi/api_get_member/questlist') {
-        QuestStore.updateQuests(body);
+        context.dispatch('handleQuestList', {
+          body,
+        });
       }
       if (url.pathname === '/kcsapi/api_port/port') {
         context.dispatch('handlePort', {
@@ -58,5 +59,16 @@ export default {
   handleShipDeck(context, payload) {
     console.log(payload);
     context.commit('updateShips', { ships: payload.ships });
+  },
+  handleQuestList(context, payload) {
+    console.log(payload);
+    const quests = payload.body.api_data.api_list.map(d => ({
+      id: d.api_no,
+      title: d.api_title,
+      detail: d.api_detail,
+      state: d.api_state,
+      progress: d.api_progress_flag,
+    }));
+    context.commit('updateQuests', { quests });
   },
 };

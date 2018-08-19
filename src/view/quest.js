@@ -1,26 +1,21 @@
-import QuestStore from '../store/quest';
+import Vuex from 'vuex';
 
 function isSelected(quest) {
-  return quest.state === 2;
+  return quest.state === 2 || quest.state === 3;
 }
 
 export default {
-  data: function() {
-    return {
-      quests: QuestStore.quests,
-    };
-  },
-  computed: {
-    selectedQuests: function() {
+  computed: Vuex.mapState({
+    selectedQuests(state) {
       const selected = [];
-      console.log(this.quests);
-      for (const id in this.quests) {
-        if (!isSelected(this.quests[id])) {
-          continue;
+      Object.values(state.quests).forEach((quest) => {
+        if (!isSelected(quest)) {
+          return;
         }
-        selected.push(this.quests[id]);
-      }
+        selected.push(quest);
+      });
+      console.log(selected);
       return selected;
-    }
-  }
-}
+    },
+  }),
+};
