@@ -1,5 +1,9 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
+import URL from 'url';
+import uuid from 'uuid/v4';
+import assert from 'assert';
+import QuestStore from './quest';
 
 Vue.use(Vuex);
 
@@ -15,6 +19,11 @@ function parseShip(data) {
     cond: data.api_cond,
     slot: data.api_slot,
   };
+}
+
+function parseBody(body) {
+  assert(body.search(/^svdata=/) === 0);
+  return JSON.parse(body.substr(7));
 }
 
 const store = new Vuex.Store({
@@ -35,6 +44,25 @@ const store = new Vuex.Store({
     },
   },
   actions: {
+    connect(context) {
+      const port = browser.runtime.connect({
+        name: uuid(),
+      });
+      port.onMessage.addListener((message) => {
+        const url = URL.parse(message.url);
+        const body = parseBody(message.body);
+        console.log(url);
+        console.log(body);
+        if (url.pathname === '/kcsapi/api_get_member/questlist') {
+          QuestStore.updateQuests(body);
+        }
+        if (url.pathname === '/kcsapi/api_port/port') {
+          context.dispatch('handlePort', {
+            body,
+          });
+        }
+      });
+    },
     handlePort(context, payload) {
       const ships = [];
       const decks = [];
