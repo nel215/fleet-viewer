@@ -10,7 +10,7 @@ new Vue({
   store,
   mounted() {
     console.log('mounted');
-    store.dispatch('connect');
+    store.dispatch('fetchMaster');
   },
   render: h => h(AppView),
 });

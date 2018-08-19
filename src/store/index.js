@@ -11,6 +11,9 @@ const store = new Vuex.Store({
     quests: {},
   },
   mutations: {
+    updateMaster(state, payload) {
+      console.log(payload);
+    },
     updateShips(state, payload) {
       payload.ships.forEach((ship) => {
         Vue.set(state.ships, ship.id, ship);

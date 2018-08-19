@@ -21,6 +21,9 @@ function parseBody(body) {
 }
 
 export default {
+  parseMaster(body) {
+    return parseBody(body);
+  },
   createAction(message) {
     const url = URL.parse(message.url);
     const body = parseBody(message.body);
