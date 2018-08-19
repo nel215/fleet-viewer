@@ -1,53 +1,54 @@
-const ports = {}
+const ports = {};
 function handleConnect(port) {
   console.log('port added', port);
   ports[port.name] = port;
-  port.onDisconnect.addListener((p)=> {
+  port.onDisconnect.addListener((p) => {
     console.log('port deleted', p);
     delete ports[p.name];
   });
 }
 browser.runtime.onConnect.addListener(handleConnect);
 
-browser.webRequest.onBeforeRequest.addListener(function(details){
-  let filter = browser.webRequest.filterResponseData(details.requestId);
-  let decoder = new TextDecoder("utf-8");
-  let encoder = new TextEncoder();
-  let body = "";
+browser.webRequest.onBeforeRequest.addListener(
+  (details) => {
+    const filter = browser.webRequest.filterResponseData(details.requestId);
+    const decoder = new TextDecoder('utf-8');
+    let body = '';
+    console.log(details);
 
-  filter.onstart = event => {
-    console.log("started");
-  }
+    filter.onstart = () => {
+      console.log('started');
+    };
 
-  filter.ondata = event => {
-    let str = decoder.decode(event.data);
-    body += str;
-    filter.write(event.data);
-  }
+    filter.ondata = (event) => {
+      const str = decoder.decode(event.data);
+      body += str;
+      filter.write(event.data);
+    };
 
-  filter.onstop = event => {
-    console.log("finished");
-    try {
-      for (name in ports) {
-        ports[name].postMessage({
-          body: body,
-          url: details.url,
-        });
+    filter.onstop = () => {
+      console.log('finished');
+      try {
+        for (name in ports) {
+          ports[name].postMessage({
+            body,
+            url: details.url,
+          });
+        }
+      } catch (e) {
+        console.log(e);
       }
-    } catch (e) {
-      console.log(e);
-    }
-    filter.disconnect();
-  }
-}, {
-  urls: ['http://203.104.209.55/*'],
-  types: ['xmlhttprequest'],
-}, [
-  'blocking',
-]
+      filter.disconnect();
+    };
+  },
+  {
+    urls: ['http://203.104.209.55/*'],
+    types: ['xmlhttprequest'],
+  },
+  ['blocking'],
 );
 
-browser.browserAction.onClicked.addListener((tab) => {
+browser.browserAction.onClicked.addListener(() => {
   browser.windows.create({
     type: 'panel',
     url: '/dist/index.html',
