@@ -52,7 +52,7 @@ browser.browserAction.onClicked.addListener(() => {
   browser.windows.create({
     type: 'panel',
     url: '/dist/index.html',
-    height: 640,
+    height: 960,
     width: 480,
   });
 });
