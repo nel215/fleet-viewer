@@ -3,6 +3,11 @@ import { mapState } from 'vuex';
 import ShipView from './ship.vue';
 
 export default Vue.extend({
+  data() {
+    return {
+      selected: 1,
+    };
+  },
   components: {
     ship: ShipView,
   },
@@ -13,7 +18,7 @@ export default Vue.extend({
       }));
       while (decks.length < 4) {
         // Set dummy
-        decks.push({ id: -(1 + decks.length) });
+        decks.push({ id: 1 + decks.length });
       }
       return decks;
     },
