@@ -22,7 +22,20 @@ function parseBody(body) {
 
 export default {
   parseMaster(body) {
-    return parseBody(body);
+    const data = parseBody(body);
+    const slotitems = data.api_data.api_mst_slotitem.reduce((a, d) => {
+      Object.assign(a, {
+        [d.api_id]: {
+          id: d.api_id,
+          name: d.api_name,
+        },
+      });
+      return a;
+    }, {});
+    const master = {
+      slotitems,
+    };
+    return master;
   },
   createAction(message) {
     const url = URL.parse(message.url);

@@ -6,13 +6,17 @@ Vue.use(Vuex);
 
 const store = new Vuex.Store({
   state: {
+    master: {},
     ships: {},
     decks: {},
     quests: {},
   },
   mutations: {
     updateMaster(state, payload) {
-      console.log(payload);
+      Object.entries(payload.master).forEach(([key, value]) => {
+        console.log(key, value);
+        Vue.set(state.master, key, value);
+      });
     },
     updateShips(state, payload) {
       payload.ships.forEach((ship) => {
