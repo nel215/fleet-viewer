@@ -1,6 +1,7 @@
 import uuid from 'uuid/v4';
 import Vue from 'vue';
 import { mapState } from 'vuex';
+import State from '../store/state';
 
 interface Slotitem {
   key: String;
@@ -26,7 +27,7 @@ function createDummySlotitem() {
   return item;
 }
 
-function createSlotitemsByIds(state, ids) {
+function createSlotitemsByIds(state: State, ids) {
   const slotitems = ids.map((id: number) => {
     if (!(id in state.slotitems)) {
       return createDummySlotitem();
@@ -50,7 +51,7 @@ function createSlotitemsByIds(state, ids) {
   return slotitems;
 }
 
-function createDummyShip(state) {
+function createDummyShip(state: State) {
   const m = state.master.ships[1] || { name: '-' };
   return <Ship>{
     name: m.name,
@@ -62,7 +63,7 @@ function createDummyShip(state) {
   };
 }
 
-function createDummyShips(state): Array<Ship> {
+function createDummyShips(state: State): Array<Ship> {
   const ships = [];
   while (ships.length < 7) {
     ships.push(createDummyShip(state));
@@ -70,7 +71,7 @@ function createDummyShips(state): Array<Ship> {
   return ships;
 }
 
-function createShip(state, shipId) {
+function createShip(state: State, shipId) {
   if (!(shipId in state.ships)) {
     return createDummyShip(state);
   }
@@ -95,7 +96,7 @@ export default Vue.extend({
     deckId: Number,
   },
   computed: mapState({
-    ships(state: any) {
+    ships(state: State) {
       console.log(JSON.parse(JSON.stringify(state)));
       const { deckId } = this as any;
       console.log(deckId);
