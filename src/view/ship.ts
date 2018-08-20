@@ -1,7 +1,7 @@
-import {mapState }from 'vuex';
+import { mapState } from 'vuex';
 
 interface Slotitem {
-  key: String,
+  key: String;
   name: String;
   shortName: String;
 }
@@ -57,7 +57,7 @@ export default {
         });
         return ships;
       });
-      const slotitems = createSlotitemsByShip(state, {id: 123, slot: [316, 473]});
+      const slotitems = createSlotitemsByShip(state, { id: 123, slot: [316, 473] });
       console.log(JSON.stringify(slotitems));
       deckShips.push([
         {
