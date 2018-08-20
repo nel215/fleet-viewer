@@ -3,6 +3,7 @@ import assert from 'assert';
 import Port from './port';
 import GetData from './get-data';
 import RequireInfo from './require-info';
+import Questlist from './questlist';
 
 function parseBody(body) {
   assert(body.search(/^svdata=/) === 0);
@@ -24,17 +25,8 @@ export default {
       return Object.assign({ type: 'handleRequreInfo' }, payload);
     }
     if (url.pathname === '/kcsapi/api_get_member/questlist') {
-      const quests = body.api_data.api_list.map(d => ({
-        id: d.api_no,
-        title: d.api_title,
-        detail: d.api_detail,
-        state: d.api_state,
-        progress: d.api_progress_flag,
-      }));
-      return {
-        type: 'handleQuestList',
-        quests,
-      };
+      const payload = Questlist.parse(body);
+      return Object.assign({ type: 'handleQuestList' }, payload);
     }
     if (url.pathname === '/kcsapi/api_port/port') {
       const payload = Port.parse(body);

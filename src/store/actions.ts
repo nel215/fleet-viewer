@@ -1,5 +1,8 @@
+import Vue from 'vue';
 import uuid from 'uuid/v4';
 import API from '../api';
+
+declare let browser: any;
 
 export default {
   connect(context) {
@@ -51,6 +54,6 @@ export default {
     context.commit('updateShips', { ships: payload.ships });
   },
   handleQuestList(context, payload) {
-    context.commit('updateQuests', { quests: payload.quests });
+    context.commit('updateQuests', payload);
   },
 };
