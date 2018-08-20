@@ -1,10 +1,9 @@
-
 interface Ship {
-  id: Number,
-};
+  id: Number;
+}
 
 function parseShip(data): Ship {
-return <Ship>{
+  return <Ship>{
     id: data.api_id,
     ship_id: data.api_ship_id,
     lv: data.api_lv,
@@ -16,6 +15,5 @@ return <Ship>{
     slot: data.api_slot,
   };
 }
-
 
 export default { parseShip };

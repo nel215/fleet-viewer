@@ -1,7 +1,6 @@
 import URL from 'url';
 import assert from 'assert';
-import { parseShip } from './ship.ts';
-
+import { parseShip } from './ship';
 
 function parseBody(body) {
   assert(body.search(/^svdata=/) === 0);
