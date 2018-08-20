@@ -9,6 +9,27 @@ function handleConnect(port) {
 }
 browser.runtime.onConnect.addListener(handleConnect);
 
+function tryCache(url, body) {
+  let tried = false;
+  const cachePaths = ['/kcsapi/api_start2/getData', '/kcsapi/api_get_member/require_info'];
+  cachePaths.forEach((path) => {
+    if (url.endsWith(path)) {
+      tried = true;
+      browser.storage.local.set({ [path]: { url, body } }).then(
+        () => {
+          console.log('set', path);
+          filter.disconnect();
+        },
+        (e) => {
+          console.log(e);
+          filter.disconnect();
+        },
+      );
+    }
+  });
+  return tried;
+}
+
 function handleBeforeRequest(details) {
   const filter = browser.webRequest.filterResponseData(details.requestId);
   const decoder = new TextDecoder('utf-8');
@@ -28,26 +49,17 @@ function handleBeforeRequest(details) {
   filter.onstop = () => {
     console.log('finished');
     try {
-      if (details.url.endsWith('/kcsapi/api_start2/getData')) {
-        browser.storage.local.set({ master: body }).then(
-          () => {
-            console.log('set master');
-            filter.disconnect();
-          },
-          (e) => {
-            console.log(e);
-            filter.disconnect();
-          },
-        );
-      } else {
-        for (name in ports) {
-          ports[name].postMessage({
-            body,
-            url: details.url,
-          });
-        }
+      if (tryCache(details.url, body)) {
         filter.disconnect();
+        return;
       }
+      Object.values(ports).forEach((port) => {
+        port.postMessage({
+          url: details.url,
+          body,
+        });
+      });
+      filter.disconnect();
     } catch (e) {
       console.log(e);
       filter.disconnect();
