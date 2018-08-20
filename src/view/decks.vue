@@ -12,7 +12,7 @@
   </mdl-tabs>
 </div>
 </template>
-<script src='./ships-list.ts'>
+<script src='./decks.ts'>
 </script>
 <style>
 </style>

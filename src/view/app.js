@@ -1,10 +1,10 @@
 import QuestView from './quest.vue';
-import ShipsListView from './ships-list.vue';
+import Decks from './decks.vue';
 
 const AppView = {
   components: {
     quest: QuestView,
-    'ships-list': ShipsListView,
+    decks: Decks,
   },
 };
 
