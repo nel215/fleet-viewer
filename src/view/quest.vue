@@ -15,6 +15,6 @@
   </div>
 </div>
 </template>
-<script src='./quest.js'></script>
+<script src='./quest.ts'></script>
 <style>
 </style>

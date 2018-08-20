@@ -1,12 +1,13 @@
-import Vuex from 'vuex';
+import { mapState } from 'vuex';
+import State from '../store/state';
 
 function isSelected(quest) {
   return quest.state === 2 || quest.state === 3;
 }
 
 export default {
-  computed: Vuex.mapState({
-    selectedQuests(state) {
+  computed: mapState({
+    selectedQuests(state: State) {
       const selected = [];
       Object.values(state.quests).forEach((quest) => {
         if (!isSelected(quest)) {
