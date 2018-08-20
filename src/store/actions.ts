@@ -50,6 +50,11 @@ export default {
     context.commit('updateShips', { ships: payload.ships });
     context.commit('updateDecks', { decks: payload.decks });
   },
+  handleShip3(context, payload) {
+    console.log('ship3');
+    context.commit('updateShips', { ships: payload.ships });
+    context.commit('updateDecks', { decks: payload.decks });
+  },
   handleShipDeck(context, payload) {
     context.commit('updateShips', { ships: payload.ships });
   },

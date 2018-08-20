@@ -40,6 +40,15 @@ export default {
         ships,
       };
     }
+    if (url.pathname === '/kcsapi/api_get_member/ship3') {
+      const ships = body.api_data.api_ship_data.map(d => Parser.parseShip(d));
+      const decks = body.api_data.api_deck_data.map(d => Parser.parseDeck(d));
+      return {
+        type: 'handleShip3',
+        ships,
+        decks,
+      };
+    }
     return null;
   },
 };
