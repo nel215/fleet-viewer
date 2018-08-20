@@ -11,6 +11,9 @@ module.exports = {
     {
       files: ['*.ts'],
       parser: 'typescript-eslint-parser',
+      rules: {
+        'no-unused-vars': 'off',
+      },
     },
   ],
   settings: {

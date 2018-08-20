@@ -1,11 +1,12 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 import actions from './actions';
+import State from './state';
 
 Vue.use(Vuex);
 
 const store = new Vuex.Store({
-  state: {
+  state: <State>{
     master: {
       ships: {},
       slotitems: {},

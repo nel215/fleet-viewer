@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import { mapState } from 'vuex';
 import ShipView from './ship.vue';
+import State from '../store/state';
 
 export default Vue.extend({
   data() {
@@ -12,7 +13,7 @@ export default Vue.extend({
     ship: ShipView,
   },
   computed: mapState({
-    decks(state: any) {
+    decks(state: State) {
       const decks = Object.values(state.decks).map((deck: any) => ({
         id: deck.id,
       }));
