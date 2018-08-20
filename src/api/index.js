@@ -1,6 +1,6 @@
 import URL from 'url';
 import assert from 'assert';
-import { parseShip } from './ship';
+import Port from './port';
 import GetData from './get-data';
 import RequireInfo from './require-info';
 
@@ -37,16 +37,8 @@ export default {
       };
     }
     if (url.pathname === '/kcsapi/api_port/port') {
-      const ships = body.api_data.api_ship.map(d => parseShip(d));
-      const decks = body.api_data.api_deck_port.map(d => ({
-        id: d.api_id,
-        ship_ids: d.api_ship,
-      }));
-      return {
-        type: 'handlePort',
-        ships,
-        decks,
-      };
+      const payload = Port.parse(body);
+      return Object.assign({ type: 'handlePort' }, payload);
     }
     if (url.pathname === '/kcsapi/api_get_member/ship_deck') {
       const ships = body.api_data.api_ship_data.map(d => parseShip(d));

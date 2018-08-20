@@ -1,3 +1,5 @@
+import uuid from 'uuid/v4';
+import Vue from 'vue';
 import { mapState } from 'vuex';
 
 interface Slotitem {
@@ -6,70 +8,107 @@ interface Slotitem {
   shortName: String;
 }
 
-function createSlotitemsByShip(state, ship) {
-  const slotitems = [];
-  ship.slot.forEach((id) => {
+interface Ship {
+  name: String;
+  lv: Number;
+  hp: Number;
+  maxhp: Number;
+  cond: Number;
+  slotitems: Array<Slotitem>;
+}
+
+function createDummySlotitem() {
+  const item = <Slotitem>{
+    key: `${uuid()}`,
+    name: '-',
+    shortName: '-',
+  };
+  return item;
+}
+
+function createSlotitemsByIds(state, ids) {
+  const slotitems = ids.map((id: number) => {
     if (!(id in state.slotitems)) {
-      return;
+      return createDummySlotitem();
     }
-    const key = `ship-${ship.id}-${id}`;
     const slotitem = state.slotitems[id];
     if (slotitem.slotitemId in state.master.slotitems) {
       const m = state.master.slotitems[slotitem.slotitemId];
-      console.log(JSON.stringify(slotitem));
-      slotitems.push(<Slotitem>{
-        key,
+      return <Slotitem>{
+        key: id.toString(),
         name: m.name,
         shortName: m.name.substr(0, 1),
-      });
-    } else {
-      slotitems.push(<Slotitem>{
-        key,
-        name: 'Unknown',
-        shortName: '?',
-      });
+      };
     }
+    return <Slotitem>{
+      key: id.toString(),
+      name: 'Unknown',
+      shortName: '?',
+    };
   });
   console.log(slotitems);
   return slotitems;
 }
 
-export default {
-  data() {
-    return {};
+function createDummyShip(state) {
+  const m = state.master.ships[1] || { name: '-' };
+  return <Ship>{
+    name: m.name,
+    lv: 0,
+    hp: 0,
+    maxhp: 0,
+    cond: 0,
+    slotitems: createSlotitemsByIds(state, [1, 1, 1, -1, -1]),
+  };
+}
+
+function createDummyShips(state): Array<Ship> {
+  const ships = [];
+  while (ships.length < 7) {
+    ships.push(createDummyShip(state));
+  }
+  return ships;
+}
+
+function createShip(state, shipId) {
+  if (!(shipId in state.ships)) {
+    return createDummyShip(state);
+  }
+  const ship = state.ships[shipId];
+  if (!(ship.shipId in state.master.ships)) {
+    return createDummyShip(state);
+  }
+  const m = state.master.ships[ship.shipId];
+  const slotitems = createSlotitemsByIds(state, ship.slot);
+  return <Ship>{
+    name: m.name,
+    lv: ship.lv,
+    hp: ship.hp,
+    maxhp: ship.maxhp,
+    cond: ship.cond,
+    slotitems,
+  };
+}
+
+export default Vue.extend({
+  props: {
+    deckId: Number,
   },
   computed: mapState({
-    deckShips(state: any) {
-      const masterSlotitems = state.master.slotitems;
-      if (masterSlotitems === undefined) {
-        return [];
+    ships(state: any) {
+      console.log(JSON.parse(JSON.stringify(state)));
+      const { deckId } = this as any;
+      console.log(deckId);
+      if (!(deckId in state.decks)) {
+        return createDummyShips(state);
       }
-      const deckShips = Object.values(state.decks).map((deck: any) => {
-        const ships = [];
-        deck.ship_ids.forEach((shipId) => {
-          if (shipId === -1) {
-            return;
-          }
-          const ship = state.ships[shipId];
-          const slotitems = createSlotitemsByShip(state, ship);
-          Object.assign(ship, { slotitems });
-          ships.push(ship);
-        });
-        return ships;
+      const deck = state.decks[deckId];
+      console.log(JSON.parse(JSON.stringify(deck)));
+      const ships = deck.ship_ids.map((shipId) => {
+        const ship = createShip(state, shipId);
+        return ship;
       });
-      const slotitems = createSlotitemsByShip(state, { id: 123, slot: [316, 473] });
-      console.log(JSON.stringify(slotitems));
-      deckShips.push([
-        {
-          ship_id: 1,
-          lv: 10,
-          hp: 20,
-          maxhp: 30,
-          cond: 50,
-          slotitems,
-        },
-      ]);
-      return deckShips;
+      return ships;
     },
   }),
-};
+});

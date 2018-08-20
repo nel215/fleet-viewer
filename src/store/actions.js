@@ -35,7 +35,7 @@ export default {
       .then((payload) => {
         const action = API.createAction(payload['/kcsapi/api_get_member/require_info']);
         context.dispatch(action);
-        // context.dispatch('connect');
+        context.dispatch('connect');
       })
       .catch((err) => {
         console.log(err);
@@ -43,6 +43,7 @@ export default {
       });
   },
   handlePort(context, payload) {
+    console.log('port');
     context.commit('updateShips', { ships: payload.ships });
     context.commit('updateDecks', { decks: payload.decks });
   },

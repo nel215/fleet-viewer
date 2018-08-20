@@ -6,7 +6,10 @@ Vue.use(Vuex);
 
 const store = new Vuex.Store({
   state: {
-    master: {},
+    master: {
+      ships: {},
+      slotitems: {},
+    },
     ships: {},
     slotitems: {},
     decks: {},
@@ -15,7 +18,7 @@ const store = new Vuex.Store({
   mutations: {
     updateMaster(state, payload) {
       Object.entries(payload.master).forEach(([key, value]) => {
-        console.log(key, value);
+        console.log(key, JSON.parse(JSON.stringify(value)));
         Vue.set(state.master, key, value);
       });
     },
