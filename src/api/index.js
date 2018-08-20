@@ -1,6 +1,8 @@
 import URL from 'url';
 import assert from 'assert';
 import { parseShip } from './ship';
+import GetData from './get-data';
+import RequireInfo from './require-info';
 
 function parseBody(body) {
   assert(body.search(/^svdata=/) === 0);
@@ -14,22 +16,12 @@ export default {
     const body = parseBody(message.body);
     console.log(body);
     if (url.pathname === '/kcsapi/api_start2/getData') {
-      const slotitems = body.api_data.api_mst_slotitem.reduce((a, d) => {
-        Object.assign(a, {
-          [d.api_id]: {
-            id: d.api_id,
-            name: d.api_name,
-          },
-        });
-        return a;
-      }, {});
-      const master = {
-        slotitems,
-      };
+      const master = GetData.parse(body);
       return { type: 'handleGetData', master };
     }
     if (url.pathname === '/kcsapi/api_get_member/require_info') {
-      return { type: 'handleRequreInfo' };
+      const payload = RequireInfo.parse(body);
+      return Object.assign({ type: 'handleRequreInfo' }, payload);
     }
     if (url.pathname === '/kcsapi/api_get_member/questlist') {
       const quests = body.api_data.api_list.map(d => ({

@@ -19,9 +19,9 @@ export default {
     console.log('get data');
     context.commit('updateMaster', { master: payload.master });
   },
-  handleRequreInfo(context) {
+  handleRequreInfo(context, payload) {
     console.log('require info');
-    console.log(context);
+    context.commit('updateSlotitems', { slotitems: payload.slotitems });
   },
   initialize(context) {
     console.log('initialize');

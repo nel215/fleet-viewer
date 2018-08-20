@@ -8,6 +8,7 @@ const store = new Vuex.Store({
   state: {
     master: {},
     ships: {},
+    slotitems: {},
     decks: {},
     quests: {},
   },
@@ -21,6 +22,11 @@ const store = new Vuex.Store({
     updateShips(state, payload) {
       payload.ships.forEach((ship) => {
         Vue.set(state.ships, ship.id, ship);
+      });
+    },
+    updateSlotitems(state, payload) {
+      payload.slotitems.forEach((slotitem) => {
+        Vue.set(state.slotitems, slotitem.id, slotitem);
       });
     },
     updateDecks(state, payload) {

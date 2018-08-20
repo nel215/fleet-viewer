@@ -28,7 +28,7 @@
   </div>
 </div>
 </template>
-<script src='./ship.js'>
+<script src='./ship.ts'>
 </script>
 <style>
 </style>
