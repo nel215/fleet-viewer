@@ -1,6 +1,6 @@
-import { Ship } from '../store/types';
+import { Ship, Deck } from '../store/types';
 
-function parseShip(data) {
+export function parseShip(data) {
   return <Ship>{
     id: data.api_id,
     shipId: data.api_ship_id,
@@ -14,6 +14,9 @@ function parseShip(data) {
   };
 }
 
-export default {
-  parseShip,
-};
+export function parseDeck(data) {
+  return <Deck>{
+    id: data.api_id,
+    shipIds: data.api_ship,
+  };
+}

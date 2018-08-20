@@ -13,3 +13,8 @@ export interface Ship {
   id: number;
   shipId: number;
 }
+
+export interface Deck {
+  id: number;
+  shipIds: Array<number>;
+}

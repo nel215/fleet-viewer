@@ -105,7 +105,7 @@ export default Vue.extend({
       }
       const deck = state.decks[deckId];
       console.log(JSON.parse(JSON.stringify(deck)));
-      const ships = deck.ship_ids.map((shipId) => {
+      const ships = deck.shipIds.map((shipId) => {
         const ship = createShip(state, shipId);
         return ship;
       });
