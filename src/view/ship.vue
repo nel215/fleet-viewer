@@ -18,9 +18,9 @@
         <td>{{ ship.hp }}/{{ ship.maxhp }}</td>
         <td>{{ ship.cond }}</td>
         <td>
-          <span id="fix-me" class="icon" v-for="slotitem in ship.slotitems">
+          <span class='icon' v-for="slotitem in ship.slotitems" :id="slotitem.key" >
             {{ slotitem.shortName }}
-            <div class="mdl-tooltip" for="fix-me">{{ slotitem.name }}</div>
+            <mdl-tooltip :target="slotitem.key">{{ slotitem.name }}</mdl-tooltip>
           </span>
         </td>
       </tr>

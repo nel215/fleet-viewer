@@ -1,26 +1,30 @@
 import {mapState }from 'vuex';
 
 interface Slotitem {
+  key: String,
   name: String;
   shortName: String;
 }
 
-function createSlotitemsByIds(state, ids) {
+function createSlotitemsByShip(state, ship) {
   const slotitems = [];
-  ids.forEach((id) => {
+  ship.slot.forEach((id) => {
     if (!(id in state.slotitems)) {
       return;
     }
+    const key = `ship-${ship.id}-${id}`;
     const slotitem = state.slotitems[id];
     if (slotitem.slotitemId in state.master.slotitems) {
       const m = state.master.slotitems[slotitem.slotitemId];
       console.log(JSON.stringify(slotitem));
       slotitems.push(<Slotitem>{
+        key,
         name: m.name,
         shortName: m.name.substr(0, 1),
       });
     } else {
       slotitems.push(<Slotitem>{
+        key,
         name: 'Unknown',
         shortName: '?',
       });
@@ -47,14 +51,13 @@ export default {
             return;
           }
           const ship = state.ships[shipId];
-          // TODO: Fix below
-          const slotitems = createSlotitemsByIds(state, ship.slot);
+          const slotitems = createSlotitemsByShip(state, ship);
           Object.assign(ship, { slotitems });
           ships.push(ship);
         });
         return ships;
       });
-      const slotitems = createSlotitemsByIds(state, [316, 473]);
+      const slotitems = createSlotitemsByShip(state, {id: 123, slot: [316, 473]});
       console.log(JSON.stringify(slotitems));
       deckShips.push([
         {
