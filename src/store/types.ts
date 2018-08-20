@@ -8,3 +8,8 @@ export interface Quest {
   title: string;
   page: number;
 }
+
+export interface Ship {
+  id: number;
+  shipId: number;
+}
