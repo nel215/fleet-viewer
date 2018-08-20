@@ -2,6 +2,7 @@ import Vue from 'vue';
 
 import AppView from './view/app.vue';
 import store from './store';
+import '../node_modules/material-design-lite/material.min';
 
 import './stylus/index.styl';
 

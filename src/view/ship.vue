@@ -10,12 +10,19 @@
         <th class="mdl-data-table__cell--non-numeric">LV</th>
         <th class="mdl-data-table__cell--non-numeric">HP</th>
         <th class="mdl-data-table__cell--non-numeric">Cond</th>
+        <th class="mdl-data-table__cell--non-numeric">Item</th>
       </thead>
       <tr v-for="ship in deck">
         <td>{{ ship.ship_id }}</td>
         <td>{{ ship.lv }}</td>
         <td>{{ ship.hp }}/{{ ship.maxhp }}</td>
         <td>{{ ship.cond }}</td>
+        <td>
+          <span id="fix-me" class="icon" v-for="slotitem in ship.slotitems">
+            {{ slotitem.shortName }}
+            <div class="mdl-tooltip" for="fix-me">{{ slotitem.name }}</div>
+          </span>
+        </td>
       </tr>
     </table>
   </div>
