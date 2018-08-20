@@ -1,19 +1,7 @@
 import URL from 'url';
 import assert from 'assert';
+import { parseShip } from './ship.ts';
 
-function parseShip(data) {
-  return {
-    id: data.api_id,
-    ship_id: data.api_ship_id,
-    lv: data.api_lv,
-    hp: data.api_nowhp,
-    maxhp: data.api_maxhp,
-    fuel: data.api_fuel,
-    bull: data.api_bull,
-    cond: data.api_cond,
-    slot: data.api_slot,
-  };
-}
 
 function parseBody(body) {
   assert(body.search(/^svdata=/) === 0);
