@@ -21,27 +21,29 @@ function parseBody(body) {
 }
 
 export default {
-  parseMaster(body) {
-    const data = parseBody(body);
-    const slotitems = data.api_data.api_mst_slotitem.reduce((a, d) => {
-      Object.assign(a, {
-        [d.api_id]: {
-          id: d.api_id,
-          name: d.api_name,
-        },
-      });
-      return a;
-    }, {});
-    const master = {
-      slotitems,
-    };
-    return master;
-  },
   createAction(message) {
     const url = URL.parse(message.url);
-    const body = parseBody(message.body);
     console.log(url);
+    const body = parseBody(message.body);
     console.log(body);
+    if (url.pathname === '/kcsapi/api_start2/getData') {
+      const slotitems = body.api_data.api_mst_slotitem.reduce((a, d) => {
+        Object.assign(a, {
+          [d.api_id]: {
+            id: d.api_id,
+            name: d.api_name,
+          },
+        });
+        return a;
+      }, {});
+      const master = {
+        slotitems,
+      };
+      return { type: 'handleGetData', master };
+    }
+    if (url.pathname === '/kcsapi/api_get_member/require_info') {
+      return { type: 'handleRequreInfo' };
+    }
     if (url.pathname === '/kcsapi/api_get_member/questlist') {
       const quests = body.api_data.api_list.map(d => ({
         id: d.api_no,

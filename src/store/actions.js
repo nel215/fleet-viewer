@@ -15,19 +15,32 @@ export default {
       context.dispatch(action);
     });
   },
-  fetchMaster(context) {
-    console.log('fetchMaster');
-    browser.storage.local.get('master').then(
-      (payload) => {
-        const master = API.parseMaster(payload.master);
-        context.commit('updateMaster', { master });
-        context.dispatch('connect');
-      },
-      (err) => {
+  handleGetData(context, payload) {
+    console.log('get data');
+    context.commit('updateMaster', { master: payload.master });
+  },
+  handleRequreInfo(context) {
+    console.log('require info');
+    console.log(context);
+  },
+  initialize(context) {
+    console.log('initialize');
+    browser.storage.local
+      .get('/kcsapi/api_start2/getData')
+      .then((payload) => {
+        const action = API.createAction(payload['/kcsapi/api_start2/getData']);
+        context.dispatch(action);
+        return browser.storage.local.get('/kcsapi/api_get_member/require_info');
+      })
+      .then((payload) => {
+        const action = API.createAction(payload['/kcsapi/api_get_member/require_info']);
+        context.dispatch(action);
+        // context.dispatch('connect');
+      })
+      .catch((err) => {
         console.log(err);
         // TODO: display error message
-      },
-    );
+      });
   },
   handlePort(context, payload) {
     context.commit('updateShips', { ships: payload.ships });

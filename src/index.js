@@ -11,7 +11,7 @@ new Vue({
   store,
   mounted() {
     console.log('mounted');
-    store.dispatch('fetchMaster');
+    store.dispatch('initialize');
   },
   render: h => h(AppView),
 });
