@@ -20,3 +20,8 @@ export function parseDeck(data) {
     shipIds: data.api_ship,
   };
 }
+
+export default {
+  parseShip,
+  parseDeck,
+};

@@ -4,6 +4,7 @@ import Port from './port';
 import GetData from './get-data';
 import RequireInfo from './require-info';
 import Questlist from './questlist';
+import Parser from './parser';
 
 function parseBody(body) {
   assert(body.search(/^svdata=/) === 0);
@@ -33,7 +34,7 @@ export default {
       return Object.assign({ type: 'handlePort' }, payload);
     }
     if (url.pathname === '/kcsapi/api_get_member/ship_deck') {
-      const ships = body.api_data.api_ship_data.map(d => parseShip(d));
+      const ships = body.api_data.api_ship_data.map(d => Parser.parseShip(d));
       return {
         type: 'handleShipDeck',
         ships,
