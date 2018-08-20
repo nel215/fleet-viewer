@@ -5,6 +5,7 @@ module.exports = {
     'no-undef': 'off',
     'no-new': 'off',
     'no-console': 'off',
+    'no-restricted-globals': [0, 'name'],
   },
   overrides: [
     {
