@@ -4,7 +4,6 @@ import VueMdl from 'vue-mdl';
 import AppView from './view/app.vue';
 import store from './store';
 
-import './sass/index.scss';
 import './stylus/index.styl';
 import '../node_modules/material-design-lite/material.min';
 

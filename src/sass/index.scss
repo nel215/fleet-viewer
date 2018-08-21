@@ -1,7 +1,0 @@
-@function hex_to_string($hex) {
-  @return "#{red($hex)},#{green($hex)},#{blue($hex)}";
-}
-$color-primary: hex_to_string(#546e7a);
-$color-primary-dark: hex_to_string(#819ca9);
-@import '../../node_modules/material-design-lite/src/material-design-lite.scss';
-
