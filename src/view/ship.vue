@@ -10,7 +10,7 @@
   <tr v-for="ship in ships">
     <td>{{ ship.name }}</td>
     <td>{{ ship.lv }}</td>
-    <td>{{ ship.hp }}/{{ ship.maxhp }}</td>
+    <td><span :class="`circle ${getHpColorClass(ship)}`"></span>{{ ship.hp }}/{{ ship.maxhp }}</td>
     <td>{{ ship.cond }}</td>
     <td>
       <span class='icon' v-for="slotitem in ship.slotitems" :id="slotitem.key" >

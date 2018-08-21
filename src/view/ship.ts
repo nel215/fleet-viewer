@@ -95,6 +95,20 @@ export default Vue.extend({
   props: {
     deckId: Number,
   },
+  methods: {
+    getHpColorClass(ship) {
+      if (ship.hp * 4 <= ship.maxhp) {
+        return 'mdl-color--red';
+      }
+      if (ship.hp * 2 <= ship.maxhp) {
+        return 'mdl-color--orange';
+      }
+      if (ship.hp * 4 <= ship.maxhp * 3) {
+        return 'mdl-color--yellow';
+      }
+      return 'mdl-color--green';
+    },
+  },
   computed: mapState({
     ships(state: State) {
       console.log(JSON.parse(JSON.stringify(state)));
