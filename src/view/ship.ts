@@ -1,7 +1,7 @@
 import uuid from 'uuid/v4';
 import Vue from 'vue';
 import { mapState } from 'vuex';
-import State from '../store/state';
+import { State } from '../store/types';
 
 interface Slotitem {
   key: String;

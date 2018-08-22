@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import { mapState } from 'vuex';
 import ShipView from './ship.vue';
-import State from '../store/state';
+import { State } from '../store/types';
 
 export default Vue.extend({
   data() {

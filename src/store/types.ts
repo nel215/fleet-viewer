@@ -3,6 +3,20 @@ export interface QuestlistPayload {
   quests: Array<Quest>;
 }
 
+export interface Master {
+  ships: Object;
+  slotitems: Object;
+  missions: Object;
+}
+
+export interface State {
+  master: Master;
+  ships: Object;
+  slotitems: Object;
+  decks: Object;
+  quests: Object;
+}
+
 export interface Quest {
   id: number;
   title: string;

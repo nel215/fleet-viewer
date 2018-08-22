@@ -1,8 +1,7 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 import actions from './actions';
-import State from './state';
-import { Quest, QuestlistPayload } from './types';
+import { State, Quest, QuestlistPayload } from './types';
 
 Vue.use(Vuex);
 
@@ -11,6 +10,7 @@ const store = new Vuex.Store({
     master: {
       ships: {},
       slotitems: {},
+      missions: {},
     },
     ships: {},
     slotitems: {},
@@ -43,7 +43,7 @@ const store = new Vuex.Store({
         if (quest.page !== payload.page) {
           return;
         }
-        Vue.delete(state.quests, quest.id);
+        Vue.delete(state.quests as any, quest.id);
       });
       payload.quests.forEach((quest) => {
         Vue.set(state.quests, quest.id, quest);

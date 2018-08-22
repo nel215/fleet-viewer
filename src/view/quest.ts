@@ -1,5 +1,5 @@
 import { mapState } from 'vuex';
-import State from '../store/state';
+import { State } from '../store/types';
 
 function isSelected(quest) {
   return quest.state === 2 || quest.state === 3;

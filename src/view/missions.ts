@@ -1,7 +1,6 @@
 import Vue from 'vue';
 import { mapState } from 'vuex';
-import State from '../store/state';
-import { Deck } from '../store/types';
+import { State, Deck } from '../store/types';
 
 function getMission(state: State, mission) {
   const m = state.master.missions[mission.id];
