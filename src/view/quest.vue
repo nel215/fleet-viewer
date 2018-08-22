@@ -1,7 +1,7 @@
 <template>
 <div>
   <div class="mdl-card__title mdl-color--primary mdl-color-text--primary-contrast">
-    <h6 class="mdl-card__title-text">Mission</h6>
+    <h6 class="mdl-card__title-text">Quest</h6>
   </div>
   <div class= "mdl-card__supporting-text">
     <table class="mdl-data-table">
