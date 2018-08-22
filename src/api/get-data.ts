@@ -1,4 +1,5 @@
 import SlotitemMaster from '../store/slotitem';
+import { MissionMaster } from '../store/types';
 
 function parseShips(data) {
   return data.reduce((a, d) => {
@@ -27,12 +28,27 @@ function parseSlotitems(data) {
   }, {});
 }
 
+function parseMissions(data) {
+  return data.reduce((a, d) => {
+    const s = <MissionMaster>{
+      id: d.api_id,
+      name: d.api_name,
+      detail: d.api_details,
+      time: d.api_time,
+    };
+    Object.assign(a, { [s.id]: s }, {});
+    return a;
+  }, {});
+}
+
 function parse(body) {
   const slotitems = parseShips(body.api_data.api_mst_slotitem);
   const ships = parseShips(body.api_data.api_mst_ship);
+  const missions = parseMissions(body.api_data.api_mst_mission);
   return {
     ships,
     slotitems,
+    missions,
   };
 }
 

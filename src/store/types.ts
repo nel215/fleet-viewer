@@ -18,3 +18,10 @@ export interface Deck {
   id: number;
   shipIds: Array<number>;
 }
+
+export interface MissionMaster {
+  id: number;
+  name: string;
+  detail: string;
+  time: number;
+}
