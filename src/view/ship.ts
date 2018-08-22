@@ -47,7 +47,6 @@ function createSlotitemsByIds(state: State, ids) {
       shortName: '?',
     };
   });
-  console.log(slotitems);
   return slotitems;
 }
 

@@ -20,7 +20,6 @@ const store = new Vuex.Store({
   mutations: {
     updateMaster(state, payload) {
       Object.entries(payload.master).forEach(([key, value]) => {
-        console.log(key, JSON.parse(JSON.stringify(value)));
         Vue.set(state.master, key, value);
       });
     },
