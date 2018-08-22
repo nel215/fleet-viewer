@@ -49,6 +49,13 @@ export default {
         decks,
       };
     }
+    if (url.pathname === '/kcsapi/api_get_member/deck') {
+      const decks = body.api_data.map(d => Parser.parseDeck(d));
+      return {
+        type: 'handleDeck',
+        decks,
+      };
+    }
     return null;
   },
 };

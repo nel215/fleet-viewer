@@ -61,4 +61,8 @@ export default {
   handleQuestList(context, payload) {
     context.commit('updateQuests', payload);
   },
+  handleDeck(context, payload) {
+    console.log('deck');
+    context.commit('updateDecks', { decks: payload.decks });
+  },
 };

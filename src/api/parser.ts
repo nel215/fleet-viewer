@@ -14,10 +14,17 @@ export function parseShip(data) {
   };
 }
 
+function parseMission(data) {
+  return {
+    id: data[1],
+  };
+}
+
 export function parseDeck(data) {
   return <Deck>{
     id: data.api_id,
     shipIds: data.api_ship,
+    missions: data.api_mission.map(d => parseMission(d)),
   };
 }
 
