@@ -21,10 +21,11 @@ function parseMission(data) {
 }
 
 export function parseDeck(data) {
+  const mission = parseMission(data.api_mission);
   return <Deck>{
     id: data.api_id,
     shipIds: data.api_ship,
-    missions: data.api_mission.map(d => parseMission(d)),
+    mission,
   };
 }
 
