@@ -14,9 +14,14 @@ export interface Ship {
   shipId: number;
 }
 
+export interface Mission {
+  id: number;
+}
+
 export interface Deck {
   id: number;
   shipIds: Array<number>;
+  mission: Mission;
 }
 
 export interface MissionMaster {
