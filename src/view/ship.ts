@@ -111,14 +111,11 @@ export default Vue.extend({
   },
   computed: mapState({
     ships(state: State) {
-      console.log(JSON.parse(JSON.stringify(state)));
       const { deckId } = this as any;
-      console.log(deckId);
       if (!(deckId in state.decks)) {
         return createDummyShips(state);
       }
       const deck = state.decks[deckId];
-      console.log(JSON.parse(JSON.stringify(deck)));
       const ships = deck.shipIds.map((shipId) => {
         const ship = createShip(state, shipId);
         return ship;
