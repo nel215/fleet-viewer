@@ -15,7 +15,7 @@ const store = new Vuex.Store({
     ships: {},
     slotitems: {},
     decks: {},
-    quests: [],
+    quests: {},
   },
   mutations: {
     updateMaster(state, payload) {
