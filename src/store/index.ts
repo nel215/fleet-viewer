@@ -15,7 +15,7 @@ const store = new Vuex.Store({
     ships: {},
     slotitems: {},
     decks: {},
-    quests: {},
+    quests: [],
   },
   mutations: {
     updateMaster(state, payload) {
@@ -43,7 +43,7 @@ const store = new Vuex.Store({
         if (quest.page !== payload.page) {
           return;
         }
-        Vue.delete(state.quests as any, quest.id);
+        Vue.delete(state.quests, quest.id);
       });
       payload.quests.forEach((quest) => {
         Vue.set(state.quests, quest.id, quest);

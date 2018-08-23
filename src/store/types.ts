@@ -14,7 +14,7 @@ export interface State {
   ships: Object;
   slotitems: Object;
   decks: Object;
-  quests: Object;
+  quests: Array<Object>;
 }
 
 export interface Quest {
