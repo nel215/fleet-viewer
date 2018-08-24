@@ -50,33 +50,32 @@ function createSlotitemsByIds(state: State, ids) {
   return slotitems;
 }
 
-function createDummyShip(state: State) {
-  const m = state.master.ships[1] || { name: '-' };
+function createDummyShip() {
   return <Ship>{
-    name: m.name,
+    name: '-',
     lv: 0,
     hp: 0,
     maxhp: 0,
     cond: 0,
-    slotitems: createSlotitemsByIds(state, [1, 1, 1, -1, -1]),
+    slotitems: [0, 0, 0, 0, 0].map(createDummySlotitem),
   };
 }
 
 function createDummyShips(state: State): Array<Ship> {
   const ships = [];
   while (ships.length < 7) {
-    ships.push(createDummyShip(state));
+    ships.push(createDummyShip());
   }
   return ships;
 }
 
 function createShip(state: State, shipId) {
   if (!(shipId in state.ships)) {
-    return createDummyShip(state);
+    return createDummyShip();
   }
   const ship = state.ships[shipId];
   if (!(ship.shipId in state.master.ships)) {
-    return createDummyShip(state);
+    return createDummyShip();
   }
   const m = state.master.ships[ship.shipId];
   const slotitems = createSlotitemsByIds(state, ship.slot);
