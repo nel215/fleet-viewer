@@ -19,3 +19,30 @@ span.circle
   margin-left: 2px
   margin-right: 2px
   text-align: center
+
+primary-color = #268785
+
+.mdl-card__title
+  background: primary-color
+  color: #ffffff
+  padding-top: 8px
+  padding-bottom: 10px
+
+.mdl-card__title-text
+  font-size: 18px
+
+tab-height = 36px
+.mdl-tabs__tab-bar
+  height: tab-height
+
+.mdl-tabs__tab
+  height: tab-height
+  line-height: tab-height
+  font-size: 12px
+  text-transform: none
+
+.mdl-tabs.is-upgraded .mdl-tabs__tab.is-active
+  color: primary-color
+
+.mdl-tabs.is-upgraded .mdl-tabs__tab.is-active::after
+  background: primary-color

@@ -1,6 +1,6 @@
 <template>
 <div>
-  <div class="mdl-card__title mdl-color--primary mdl-color-text--primary-contrast">
+  <div class="mdl-card__title">
     <h6 class="mdl-card__title-text">Quest</h6>
   </div>
   <table class="mdl-data-table mdl-cell mdl-cell--12-col">
