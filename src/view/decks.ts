@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import { mapState } from 'vuex';
-import ShipView from './ship.vue';
+import DeckView from './deck.vue';
 import { State } from '../store/types';
 
 export default Vue.extend({
@@ -10,7 +10,7 @@ export default Vue.extend({
     };
   },
   components: {
-    ship: ShipView,
+    deck: DeckView,
   },
   computed: mapState({
     decks(state: State) {

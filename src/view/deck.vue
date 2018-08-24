@@ -21,7 +21,7 @@
   </tr>
 </table>
 </template>
-<script src='./ship.ts'>
+<script src='./deck.ts'>
 </script>
 <style>
 </style>
