@@ -6,15 +6,19 @@ interface Mission {
   timeLeft: string;
 }
 
+function getDummyMission() {
+  return <Mission>{
+    name: '-',
+    timeLeft: '-',
+  };
+}
+
 function prepareMission(state: State, current, mission) {
   const m = state.master.missions[mission.id];
   if (m === undefined) {
-    return {
-      name: '-',
-      timeLeft: '-',
-    };
+    return getDummyMission();
   }
-  return {
+  return <Mission>{
     name: m.name,
     timeLeft: `${mission.end - current}`,
   };
@@ -45,6 +49,9 @@ export default Vue.extend({
       let decks: Array<Deck> = Object.values(state.decks);
       decks = decks.filter(d => !isPrimary(d));
       const missions = decks.map(deck => prepareMission(state, this.current, deck.mission));
+      while (missions.length < 3) {
+        missions.push(getDummyMission());
+      }
       return missions;
     },
   },
