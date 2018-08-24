@@ -7,11 +7,13 @@
     <thead>
       <tr>
         <th class="mdl-data-table__cell--non-numeric">Name</th>
+        <th class="mdl-data-table__cell--non-numeric">Left</th>
       </tr>
     </thead>
     <tbody>
       <tr v-for="mission in missions">
         <td class="mdl-data-table__cell--non-numeric">{{ mission.name }}</td>
+        <td>{{ mission.timeLeft }}</td>
       </tr>
     </tbody>
   </table>

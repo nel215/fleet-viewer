@@ -30,6 +30,7 @@ export interface Ship {
 
 export interface Mission {
   id: number;
+  end: number;
 }
 
 export interface Deck {

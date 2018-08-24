@@ -1,16 +1,22 @@
 import Vue from 'vue';
-import { mapState } from 'vuex';
 import { State, Deck } from '../store/types';
 
-function getMission(state: State, mission) {
+interface Mission {
+  name: string;
+  timeLeft: string;
+}
+
+function prepareMission(state: State, current, mission) {
   const m = state.master.missions[mission.id];
   if (m === undefined) {
     return {
       name: '-',
+      timeLeft: '-',
     };
   }
   return {
     name: m.name,
+    timeLeft: `${mission.end - current}`,
   };
 }
 
@@ -19,12 +25,27 @@ function isPrimary(deck) {
 }
 
 export default Vue.extend({
-  computed: mapState({
-    missions(state: State) {
+  data() {
+    return {
+      current: Date.now(),
+      intervalId: null,
+    };
+  },
+  mounted() {
+    this.intervalId = setInterval(() => {
+      this.current = Date.now();
+    }, 1000);
+  },
+  beforeDestroy() {
+    clearInterval(this.intervalId);
+  },
+  computed: {
+    missions(): Array<Mission> {
+      const { state } = this.$store;
       let decks: Array<Deck> = Object.values(state.decks);
       decks = decks.filter(d => !isPrimary(d));
-      const missions = decks.map(deck => getMission(state, deck.mission));
+      const missions = decks.map(deck => prepareMission(state, this.current, deck.mission));
       return missions;
     },
-  }),
+  },
 });

@@ -1,4 +1,4 @@
-import { Ship, Deck } from '../store/types';
+import { Ship, Deck, Mission } from '../store/types';
 
 export function parseShip(data) {
   return <Ship>{
@@ -15,8 +15,9 @@ export function parseShip(data) {
 }
 
 function parseMission(data) {
-  return {
+  return <Mission>{
     id: data[1],
+    end: data[2],
   };
 }
 
