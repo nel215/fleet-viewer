@@ -42,7 +42,7 @@ function parseMissions(data) {
 }
 
 function parse(body) {
-  const slotitems = parseShips(body.api_data.api_mst_slotitem);
+  const slotitems = parseSlotitems(body.api_data.api_mst_slotitem);
   const ships = parseShips(body.api_data.api_mst_ship);
   const missions = parseMissions(body.api_data.api_mst_mission);
   return {
