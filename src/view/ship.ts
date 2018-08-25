@@ -1,7 +1,9 @@
+import uuid from 'uuid/v4';
 import Vue from 'vue';
 import { State } from '../store/types';
 
 interface Slotitem {
+  id: string,
   name: String;
   shortName: String;
 }
@@ -17,6 +19,7 @@ interface Ship {
 
 function createDummySlotitem() {
   const item = <Slotitem>{
+    id: uuid(),
     name: '-',
     shortName: '-',
   };
@@ -43,13 +46,13 @@ function createSlotitemsByIds(state: State, ids) {
     if (slotitem.slotitemId in state.master.slotitems) {
       const m = state.master.slotitems[slotitem.slotitemId];
       return <Slotitem>{
-        key: id.toString(),
+        id: uuid(),
         name: m.name,
         shortName: m.name.substr(0, 1),
       };
     }
     return <Slotitem>{
-      key: id.toString(),
+      id: uuid(),
       name: 'Unknown',
       shortName: '?',
     };

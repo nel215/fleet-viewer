@@ -7,7 +7,7 @@
   <td>
     <span class='icon' v-for="(slotitem, idx) in ship.slotitems" :id="idx" >
       {{ slotitem.shortName }}
-      <mdl-tooltip :target="slotitem.key">{{ slotitem.name }}</mdl-tooltip>
+      <mdl-tooltip :target="slotitem.id">{{ slotitem.name }}</mdl-tooltip>
     </span>
   </td>
 </tr>
