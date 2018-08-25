@@ -8,7 +8,7 @@ export function parseShip(data) {
     hp: data.api_nowhp,
     maxhp: data.api_maxhp,
     fuel: data.api_fuel,
-    bull: data.api_bull,
+    bullet: data.api_bull,
     cond: data.api_cond,
     slot: data.api_slot,
   };
