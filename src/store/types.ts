@@ -56,3 +56,9 @@ export interface ShipMaster {
   maxFuel: number;
   maxBullet: number;
 }
+
+export interface SlotitemMaster {
+  id: number;
+  name: string;
+  tyku: number;
+}

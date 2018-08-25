@@ -1,5 +1,4 @@
-import SlotitemMaster from '../store/slotitem';
-import { MissionMaster, ShipMaster } from '../store/types';
+import { MissionMaster, ShipMaster, SlotitemMaster } from '../store/types';
 
 function parseShips(data) {
   return data.reduce((a, d) => {
@@ -11,6 +10,7 @@ function parseShips(data) {
         ctype: d.api_ctype,
         maxFuel: d.api_fuel_max,
         maxBullet: d.api_bull_max,
+        maxEq: d.api_maxeq,
       },
     });
     return a;
@@ -22,6 +22,7 @@ function parseSlotitems(data) {
     const s = <SlotitemMaster>{
       id: d.api_id,
       name: d.api_name,
+      tyku: d.api_tyku,
     };
     Object.assign(a, { [d.api_id]: s }, {});
     return a;
