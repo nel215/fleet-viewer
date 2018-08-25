@@ -3,7 +3,7 @@ import Vue from 'vue';
 import { State } from '../store/types';
 
 interface Slotitem {
-  id: string,
+  id: string;
   name: String;
   shortName: String;
 }
