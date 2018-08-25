@@ -14,6 +14,8 @@ interface Ship {
   hp: Number;
   maxhp: Number;
   cond: Number;
+  bullet: number;
+  maxBullet: number;
   slotitems: Array<Slotitem>;
 }
 
@@ -33,6 +35,8 @@ function createDummyShip() {
     hp: 0,
     maxhp: 0,
     cond: 0,
+    bullet: 0,
+    maxBullet: 0,
     slotitems: [0, 0, 0, 0, 0].map(createDummySlotitem),
   };
 }
@@ -77,6 +81,21 @@ export default Vue.extend({
       }
       return 'mdl-color--green';
     },
+    getBulletColorClass(ship: Ship) {
+      if (ship.maxBullet === 0) {
+        return 'mdl-color--grey';
+      }
+      if (ship.bullet * 10 < ship.maxBullet * 2) {
+        return 'mdl-color--red';
+      }
+      if (ship.bullet * 10 < ship.maxBullet * 4) {
+        return 'mdl-color--orange';
+      }
+      if (ship.bullet * 10 < ship.maxBullet * 6) {
+        return 'mdl-color--yellow';
+      }
+      return 'mdl-color--green';
+    },
   },
   computed: {
     ship(): Object {
@@ -96,6 +115,8 @@ export default Vue.extend({
         hp: ship.hp,
         maxhp: ship.maxhp,
         cond: ship.cond,
+        bullet: ship.bullet,
+        maxBullet: m.maxBullet,
         slotitems,
       };
     },

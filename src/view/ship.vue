@@ -4,6 +4,7 @@
   <td>{{ ship.lv }}</td>
   <td><span :class="`circle ${getHpColorClass(ship)}`"></span>{{ ship.hp }}/{{ ship.maxhp }}</td>
   <td>{{ ship.cond }}</td>
+  <td><span :class="`circle ${getBulletColorClass(ship)}`"></span></td>
   <td>
     <span class='icon' v-for="(slotitem, idx) in ship.slotitems" :id="idx" >
       {{ slotitem.shortName }}

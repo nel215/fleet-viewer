@@ -26,6 +26,8 @@ export interface Quest {
 export interface Ship {
   id: number;
   shipId: number;
+  fuel: number;
+  bullet: number;
 }
 
 export interface Mission {
