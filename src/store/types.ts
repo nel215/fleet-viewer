@@ -55,6 +55,7 @@ export interface ShipMaster {
   ctype: number;
   maxFuel: number;
   maxBullet: number;
+  maxSpaces: Array<number>;
 }
 
 export interface SlotitemMaster {

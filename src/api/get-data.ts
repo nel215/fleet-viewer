@@ -10,7 +10,7 @@ function parseShips(data) {
         ctype: d.api_ctype,
         maxFuel: d.api_fuel_max,
         maxBullet: d.api_bull_max,
-        maxEq: d.api_maxeq,
+        maxSpaces: d.api_maxeq,
       },
     });
     return a;
