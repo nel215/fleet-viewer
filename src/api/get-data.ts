@@ -17,12 +17,17 @@ function parseShips(data) {
   }, {});
 }
 
+function getIsAirPower(d) {
+  return [5, 36, 40, 43].some(t => t === d.api_type[1]);
+}
+
 function parseSlotitems(data) {
   return data.reduce((a, d) => {
     const s = <SlotitemMaster>{
       id: d.api_id,
       name: d.api_name,
       tyku: d.api_tyku,
+      isAirPower: getIsAirPower(d),
     };
     Object.assign(a, { [d.api_id]: s }, {});
     return a;

@@ -13,6 +13,7 @@
   <tbody>
     <ship v-for="(shipId, idx) in shipIds" :ship-id="shipId" :key="idx"></ship>
   </tbody>
+  {{ airPower }}
 </table>
 </template>
 <script src='./deck.ts'>
