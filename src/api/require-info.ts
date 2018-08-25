@@ -1,8 +1,4 @@
-interface Slotitem {
-  id: Number;
-  slotitemId: Number;
-  locked: Boolean;
-}
+import { Slotitem } from '../store/types';
 
 export default {
   parse(body) {

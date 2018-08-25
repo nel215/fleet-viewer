@@ -41,6 +41,12 @@ export interface Deck {
   mission: Mission;
 }
 
+export interface Slotitem {
+  id: number;
+  slotitemId: number;
+  locked: boolean;
+}
+
 export interface MissionMaster {
   id: number;
   name: string;
