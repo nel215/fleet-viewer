@@ -6,7 +6,7 @@
   <td>{{ ship.cond }}</td>
   <td><span :class="`circle ${getBulletColorClass(ship)}`"></span></td>
   <td>
-    <span class='icon' v-for="(slotitem, idx) in ship.slotitems" :id="idx" >
+    <span class='icon' v-for="slotitem in ship.slotitems" :id="slotitem.id" >
       {{ slotitem.shortName }}
       <mdl-tooltip :target="slotitem.id">{{ slotitem.name }}</mdl-tooltip>
     </span>
