@@ -81,6 +81,6 @@ browser.browserAction.onClicked.addListener(() => {
     type: 'panel',
     url: '/dist/index.html',
     height: 960,
-    width: 480,
+    width: 640,
   });
 });
