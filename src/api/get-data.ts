@@ -1,10 +1,10 @@
 import SlotitemMaster from '../store/slotitem';
-import { MissionMaster } from '../store/types';
+import { MissionMaster, ShipMaster } from '../store/types';
 
 function parseShips(data) {
   return data.reduce((a, d) => {
     Object.assign(a, {
-      [d.api_id]: {
+      [d.api_id]: <ShipMaster>{
         id: d.api_id,
         name: d.api_name,
         stype: d.api_stype,

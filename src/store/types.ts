@@ -45,3 +45,12 @@ export interface MissionMaster {
   detail: string;
   time: number;
 }
+
+export interface ShipMaster {
+  id: number;
+  name: string;
+  stype: number;
+  ctype: number;
+  maxFuel: number;
+  maxBullet: number;
+}
