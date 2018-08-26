@@ -17,10 +17,28 @@ interface Ship {
   fuel: number;
   maxFuel: number;
   fuelPercentage: string;
+  fuelColor: string;
   bullet: number;
   maxBullet: number;
   bulletPercentage: string;
+  bulletColor: string;
   slotitems: Array<Slotitem>;
+}
+
+function getFuelOrBulletColor(now, max) {
+  if (max === 0) {
+    return 'mdl-color--grey-400 mdl-color-text--white';
+  }
+  if (now * 10 < max * 2) {
+    return 'mdl-color--red-600 mdl-color-text--white';
+  }
+  if (now * 10 < max * 4) {
+    return 'mdl-color--orange-600 mdl-color-text--white';
+  }
+  if (now * 10 < max * 6) {
+    return 'mdl-color--yellow-600 mdl-color-text--white';
+  }
+  return 'mdl-color--green-600 mdl-color-text--white';
 }
 
 function createDummySlotitem() {
@@ -42,9 +60,11 @@ function createDummyShip() {
     fuel: 0,
     maxFuel: 0,
     fuelPercentage: '0%',
+    fuelColor: getFuelOrBulletColor(0, 0),
     bullet: 0,
     maxBullet: 0,
     bulletPercentage: '0%',
+    bulletColor: getFuelOrBulletColor(0, 0),
     slotitems: [0, 0, 0, 0, 0].map(createDummySlotitem),
   };
 }
@@ -89,21 +109,6 @@ export default Vue.extend({
       }
       return 'mdl-color--green';
     },
-    getFuelOrBulletColor(now, max) {
-      if (max === 0) {
-        return 'mdl-color--grey-400 mdl-color-text--white';
-      }
-      if (now * 10 < max * 2) {
-        return 'mdl-color--red-600 mdl-color-text--white';
-      }
-      if (now * 10 < max * 4) {
-        return 'mdl-color--orange-600 mdl-color-text--white';
-      }
-      if (now * 10 < max * 6) {
-        return 'mdl-color--yellow-600 mdl-color-text--white';
-      }
-      return 'mdl-color--green-600 mdl-color-text--white';
-    },
   },
   computed: {
     ship(): Object {
@@ -119,6 +124,8 @@ export default Vue.extend({
       const slotitems = createSlotitemsByIds(state, ship.slot);
       const fuelPercentage = `${Math.floor((ship.fuel / m.maxFuel) * 100)}%`;
       const bulletPercentage = `${Math.floor((ship.bullet / m.maxBullet) * 100)}%`;
+      const fuelColor = getFuelOrBulletColor(ship.fuel, m.maxFuel);
+      const bulletColor = getFuelOrBulletColor(ship.bullet, m.maxBullet);
       return <Ship>{
         name: m.name,
         lv: ship.lv,
@@ -128,9 +135,11 @@ export default Vue.extend({
         bullet: ship.bullet,
         maxBullet: m.maxBullet,
         bulletPercentage,
+        bulletColor,
         fuel: ship.fuel,
         maxFuel: m.maxFuel,
         fuelPercentage,
+        fuelColor,
         slotitems,
       };
     },

@@ -4,8 +4,8 @@
   <td>{{ ship.lv }}</td>
   <td><span :class="`circle ${getHpColorClass(ship)}`"></span>{{ ship.hp }}/{{ ship.maxhp }}</td>
   <td>{{ ship.cond }}</td>
-  <td><span :class="`box ${getFuelOrBulletColor(ship.fuel, ship.maxFuel)}`">{{ ship.fuelPercentage }}</span></td>
-  <td><span :class="`box ${getFuelOrBulletColor(ship.bullet, ship.maxBullet)}`">{{ ship.bulletPercentage }}</span></td>
+  <td><span :class="`box ${ship.fuelColor}`">{{ ship.fuelPercentage }}</span></td>
+  <td><span :class="`box ${ship.bulletColor}`">{{ ship.bulletPercentage }}</span></td>
   <td>
     <span class='icon' v-for="slotitem in ship.slotitems" :id="slotitem.id" >
       {{ slotitem.shortName }}
