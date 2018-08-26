@@ -37,7 +37,7 @@ function getHpColor(now, max) {
     return 'mdl-color--orange-600 mdl-color-text--white';
   }
   if (now * 4 <= max * 3) {
-    return 'mdl-color--yellow-600 mdl-color-text--white';
+    return 'mdl-color--yellow-700 mdl-color-text--white';
   }
   return 'mdl-color--green-600 mdl-color-text--white';
 }
@@ -53,7 +53,7 @@ function getFuelOrBulletColor(now, max) {
     return 'mdl-color--orange-600 mdl-color-text--white';
   }
   if (now * 10 < max * 6) {
-    return 'mdl-color--yellow-600 mdl-color-text--white';
+    return 'mdl-color--yellow-700 mdl-color-text--white';
   }
   return 'mdl-color--green-600 mdl-color-text--white';
 }
