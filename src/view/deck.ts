@@ -2,6 +2,17 @@ import Vue from 'vue';
 import ShipView from './ship.vue';
 import { SlotitemMaster, ShipMaster } from '../store/types';
 
+function getAirBonus(minorType, airLevel): number {
+  let bonus = [0, 1, 1, 2, 2, 2, 2, 3][airLevel];
+  if ([6, 45].some(d => d === minorType)) {
+    bonus += [0, 0, 2, 5, 9, 14, 14, 22][airLevel];
+  }
+  if (minorType === 11) {
+    bonus += [0, 0, 1, 1, 1, 3, 3, 6][airLevel];
+  }
+  return bonus;
+}
+
 export default Vue.extend({
   props: {
     deckId: Number,
@@ -48,7 +59,9 @@ export default Vue.extend({
           }
           const space = shipMaster.maxSpaces[idx];
           const antiair = slotitemMaster.tyku;
-          return Math.floor(antiair * Math.sqrt(space)); // TODO: plus
+          let power = antiair * Math.sqrt(space);
+          power += getAirBonus(slotitemMaster.type, slotitem.airLevel);
+          return Math.floor(power); // TODO: plus
         });
         console.log(shipId, shipPowers);
         return shipPowers.reduce((res, p) => res + p, 0);

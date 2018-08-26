@@ -45,6 +45,8 @@ export interface Slotitem {
   id: number;
   slotitemId: number;
   locked: boolean;
+  level: number;
+  airLevel: number;
 }
 
 export interface MissionMaster {

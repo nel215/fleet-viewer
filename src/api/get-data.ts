@@ -27,6 +27,7 @@ function parseSlotitems(data) {
       id: d.api_id,
       name: d.api_name,
       tyku: d.api_tyku,
+      type: d.api_type[2],
       isAirPower: getIsAirPower(d),
     };
     Object.assign(a, { [d.api_id]: s }, {});

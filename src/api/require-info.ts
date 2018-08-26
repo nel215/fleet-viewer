@@ -7,6 +7,8 @@ export default {
         id: d.api_id,
         slotitemId: d.api_slotitem_id,
         locked: d.api_locked === 1,
+        level: d.api_level,
+        airLevel: d.api_alv || 0,
       },
     );
     return {
