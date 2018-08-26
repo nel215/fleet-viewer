@@ -7,6 +7,7 @@
         <th class="mdl-data-table__cell--non-numeric">LV</th>
         <th class="mdl-data-table__cell--non-numeric">HP</th>
         <th class="mdl-data-table__cell--non-numeric">Cond</th>
+        <th class="mdl-data-table__cell--non-numeric">Fuel</th>
         <th class="mdl-data-table__cell--non-numeric">Bullet</th>
         <th class="mdl-data-table__cell--non-numeric">Item</th>
       </tr>

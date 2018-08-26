@@ -14,8 +14,12 @@ interface Ship {
   hp: Number;
   maxhp: Number;
   cond: Number;
+  fuel: number;
+  maxFuel: number;
+  fuelPercentage: string;
   bullet: number;
   maxBullet: number;
+  bulletPercentage: string;
   slotitems: Array<Slotitem>;
 }
 
@@ -35,8 +39,12 @@ function createDummyShip() {
     hp: 0,
     maxhp: 0,
     cond: 0,
+    fuel: 0,
+    maxFuel: 0,
+    fuelPercentage: '0%',
     bullet: 0,
     maxBullet: 0,
+    bulletPercentage: '0%',
     slotitems: [0, 0, 0, 0, 0].map(createDummySlotitem),
   };
 }
@@ -81,20 +89,20 @@ export default Vue.extend({
       }
       return 'mdl-color--green';
     },
-    getBulletColorClass(ship: Ship) {
-      if (ship.maxBullet === 0) {
-        return 'mdl-color--grey';
+    getFuelOrBulletColor(now, max) {
+      if (max === 0) {
+        return 'mdl-color--grey-400 mdl-color-text--white';
       }
-      if (ship.bullet * 10 < ship.maxBullet * 2) {
-        return 'mdl-color--red';
+      if (now * 10 < max * 2) {
+        return 'mdl-color--red-600 mdl-color-text--white';
       }
-      if (ship.bullet * 10 < ship.maxBullet * 4) {
-        return 'mdl-color--orange';
+      if (now * 10 < max * 4) {
+        return 'mdl-color--orange-600 mdl-color-text--white';
       }
-      if (ship.bullet * 10 < ship.maxBullet * 6) {
-        return 'mdl-color--yellow';
+      if (now * 10 < max * 6) {
+        return 'mdl-color--yellow-600 mdl-color-text--white';
       }
-      return 'mdl-color--green';
+      return 'mdl-color--green-600 mdl-color-text--white';
     },
   },
   computed: {
@@ -109,6 +117,8 @@ export default Vue.extend({
       }
       const m = state.master.ships[ship.shipId];
       const slotitems = createSlotitemsByIds(state, ship.slot);
+      const fuelPercentage = `${Math.floor((ship.fuel / m.maxFuel) * 100)}%`;
+      const bulletPercentage = `${Math.floor((ship.bullet / m.maxBullet) * 100)}%`;
       return <Ship>{
         name: m.name,
         lv: ship.lv,
@@ -117,6 +127,10 @@ export default Vue.extend({
         cond: ship.cond,
         bullet: ship.bullet,
         maxBullet: m.maxBullet,
+        bulletPercentage,
+        fuel: ship.fuel,
+        maxFuel: m.maxFuel,
+        fuelPercentage,
         slotitems,
       };
     },

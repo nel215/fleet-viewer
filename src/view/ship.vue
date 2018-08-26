@@ -1,10 +1,11 @@
 <template>
 <tr>
-  <td>{{ ship.name }}</td>
+  <td class="mdl-data-table__cell--non-numeric">{{ ship.name }}</td>
   <td>{{ ship.lv }}</td>
   <td><span :class="`circle ${getHpColorClass(ship)}`"></span>{{ ship.hp }}/{{ ship.maxhp }}</td>
   <td>{{ ship.cond }}</td>
-  <td><span :class="`circle ${getBulletColorClass(ship)}`"></span></td>
+  <td><span :class="`box ${getFuelOrBulletColor(ship.fuel, ship.maxFuel)}`">{{ ship.fuelPercentage }}</span></td>
+  <td><span :class="`box ${getFuelOrBulletColor(ship.bullet, ship.maxBullet)}`">{{ ship.bulletPercentage }}</span></td>
   <td>
     <span class='icon' v-for="slotitem in ship.slotitems" :id="slotitem.id" >
       {{ slotitem.shortName }}
