@@ -10,23 +10,14 @@ td
     margin-right: 2px
     text-align: center
 
-span.box
-  display: inline-block
-  width: 40px
-  line-height: 18px
-  border-radius: 4px
-  padding: 2px
-  text-align: center
-
-span.circle
-  display: inline-block
-  width: 16px
-  height: 16px
-  background-color: #cccccc
-  border-radius: 50%
-  margin-left: 2px
-  margin-right: 2px
-  text-align: center
+for w in (16..64)
+  span.box-{w}
+    display: inline-block
+    width: (w)px
+    line-height: 18px
+    border-radius: 4px
+    padding: 3px
+    text-align: center
 
 table
   tfoot

@@ -13,6 +13,7 @@ interface Ship {
   lv: Number;
   hp: Number;
   maxhp: Number;
+  hpColor: string;
   cond: Number;
   fuel: number;
   maxFuel: number;
@@ -23,6 +24,22 @@ interface Ship {
   bulletPercentage: string;
   bulletColor: string;
   slotitems: Array<Slotitem>;
+}
+
+function getHpColor(now, max) {
+  if (max === 0) {
+    return 'mdl-color--grey-400 mdl-color-text--white';
+  }
+  if (now * 4 <= max) {
+    return 'mdl-color--red-600 mdl-color-text--white';
+  }
+  if (now * 2 <= max) {
+    return 'mdl-color--orange-600 mdl-color-text--white';
+  }
+  if (now * 4 <= max * 3) {
+    return 'mdl-color--yellow-600 mdl-color-text--white';
+  }
+  return 'mdl-color--green-600 mdl-color-text--white';
 }
 
 function getFuelOrBulletColor(now, max) {
@@ -56,6 +73,7 @@ function createDummyShip() {
     lv: 0,
     hp: 0,
     maxhp: 0,
+    hpColor: getHpColor(0, 0),
     cond: 0,
     fuel: 0,
     maxFuel: 0,
@@ -96,20 +114,7 @@ export default Vue.extend({
   props: {
     shipId: Number,
   },
-  methods: {
-    getHpColorClass(ship) {
-      if (ship.hp * 4 <= ship.maxhp) {
-        return 'mdl-color--red';
-      }
-      if (ship.hp * 2 <= ship.maxhp) {
-        return 'mdl-color--orange';
-      }
-      if (ship.hp * 4 <= ship.maxhp * 3) {
-        return 'mdl-color--yellow';
-      }
-      return 'mdl-color--green';
-    },
-  },
+  methods: {},
   computed: {
     ship(): Object {
       const { state } = this.$store;
@@ -122,6 +127,7 @@ export default Vue.extend({
       }
       const m = state.master.ships[ship.shipId];
       const slotitems = createSlotitemsByIds(state, ship.slot);
+      const hpColor = getHpColor(ship.hp, ship.maxhp);
       const fuelPercentage = `${Math.floor((ship.fuel / m.maxFuel) * 100)}%`;
       const bulletPercentage = `${Math.floor((ship.bullet / m.maxBullet) * 100)}%`;
       const fuelColor = getFuelOrBulletColor(ship.fuel, m.maxFuel);
@@ -130,6 +136,7 @@ export default Vue.extend({
         name: m.name,
         lv: ship.lv,
         hp: ship.hp,
+        hpColor,
         maxhp: ship.maxhp,
         cond: ship.cond,
         bullet: ship.bullet,
