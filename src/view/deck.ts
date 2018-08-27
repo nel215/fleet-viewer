@@ -1,13 +1,13 @@
 import Vue from 'vue';
 import ShipView from './ship.vue';
-import { SlotitemMaster, ShipMaster } from '../store/types';
+import { SlotitemMaster, ShipMaster, ItemType } from '../store/types';
 
 function getAirBonus(minorType, airLevel): number {
   let bonus = [0, 1, 1, 2, 2, 2, 2, 3][airLevel];
-  if ([6, 45].some(d => d === minorType)) {
+  if ([ItemType.Fighter, ItemType.SeaplaneFighter].some(d => d === minorType)) {
     bonus += [0, 0, 2, 5, 9, 14, 14, 22][airLevel];
   }
-  if (minorType === 11) {
+  if (minorType === ItemType.SeaplaneBomber) {
     bonus += [0, 0, 1, 1, 1, 3, 3, 6][airLevel];
   }
   return bonus;

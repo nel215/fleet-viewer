@@ -69,5 +69,15 @@ export interface ShipMaster {
 export interface SlotitemMaster {
   id: number;
   name: string;
+  type: ItemType;
   tyku: number;
+}
+
+export enum ItemType {
+  SmallCaliberMainGun = 1,
+  Fighter = 6,
+  DiveBomber = 7,
+  TorpedoBomber = 8,
+  SeaplaneBomber = 11,
+  SeaplaneFighter = 45,
 }
