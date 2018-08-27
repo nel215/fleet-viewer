@@ -13,6 +13,16 @@ function getAirBonus(minorType, airLevel): number {
   return bonus;
 }
 
+function getImprovementBonus(itemType, itemLevel) {
+  if ([ItemType.Fighter, ItemType.SeaplaneFighter].some(d => d === itemType)) {
+    return 0.2 * itemLevel;
+  }
+  if (itemType === ItemType.DiveBomber) {
+    return 0.25 * itemLevel;
+  }
+  return 0;
+}
+
 export default Vue.extend({
   props: {
     deckId: Number,
@@ -59,9 +69,10 @@ export default Vue.extend({
           }
           const space = shipMaster.maxSpaces[idx];
           const antiair = slotitemMaster.tyku;
-          let power = antiair * Math.sqrt(space);
+          const improvementBonus = getImprovementBonus(slotitemMaster.type, slotitem.level);
+          let power = (antiair + improvementBonus) * Math.sqrt(space);
           power += getAirBonus(slotitemMaster.type, slotitem.airLevel);
-          return Math.floor(power); // TODO: plus
+          return Math.floor(power);
         });
         console.log(shipId, shipPowers);
         return shipPowers.reduce((res, p) => res + p, 0);
