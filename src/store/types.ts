@@ -28,6 +28,7 @@ export interface Ship {
   shipId: number;
   fuel: number;
   bullet: number;
+  los: number;
 }
 
 export interface Mission {
@@ -71,6 +72,7 @@ export interface SlotitemMaster {
   name: string;
   type: ItemType;
   tyku: number;
+  los: number;
 }
 
 export enum ItemType {

@@ -18,6 +18,7 @@
     <tfoot>
       <tr>
         <div class="table-cell">Aerial: {{ airPower }}</div>
+        <div class="table-cell">LOS: {{ los }}</div>
       </tr>
     </tfoot>
   </table>

@@ -74,11 +74,39 @@ export default Vue.extend({
           power += getAirBonus(slotitemMaster.type, slotitem.airLevel);
           return Math.floor(power);
         });
-        console.log(shipId, shipPowers);
         return shipPowers.reduce((res, p) => res + p, 0);
       });
-      console.log(powers);
       return powers.reduce((res, p) => res + p, 0);
+    },
+    los(): string {
+      const { state } = this.$store;
+      if (!(this.deckId in state.decks)) {
+        return '0.00';
+      }
+      const deck = state.decks[this.deckId];
+      const shipIds = deck.shipIds.filter(shipId => shipId in state.ships);
+      const ships = shipIds.map(shipId => state.ships[shipId]);
+      const slotitemLos = ships.map((ship) => {
+        const itemLos = ship.slot.map((slotitemId) => {
+          if (!(slotitemId in state.slotitems)) {
+            return 0;
+          }
+          const slotitem = state.slotitems[slotitemId];
+          if (!(slotitem.slotitemId in state.master.slotitems)) {
+            return 0;
+          }
+          const slotitemMaster = state.master.slotitems[slotitem.slotitemId];
+          return 0.6 * slotitemMaster.los; // TODO: coefficient
+        });
+        return itemLos.reduce((res, los) => res + los, 0);
+      });
+
+      let los = 0;
+      los += ships.reduce((res, ship) => res + Math.sqrt(ship.los), 0);
+      los += slotitemLos.reduce((res, slos) => res + slos, 0);
+      los -= Math.floor(0.4 * 120); // TODO
+      los += 2 * (6 - ships.length);
+      return los.toFixed(2);
     },
   },
 });

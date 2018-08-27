@@ -10,6 +10,7 @@ export function parseShip(data) {
     fuel: data.api_fuel,
     bullet: data.api_bull,
     cond: data.api_cond,
+    los: data.api_sakuteki[0],
     slot: data.api_slot,
   };
 }
