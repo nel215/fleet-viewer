@@ -7,7 +7,7 @@
     <thead>
       <tr>
         <th class="mdl-data-table__cell--non-numeric">Name</th>
-        <th class="mdl-data-table__cell--non-numeric">Left</th>
+        <th>Left</th>
       </tr>
     </thead>
     <tbody>

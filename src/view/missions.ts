@@ -13,14 +13,24 @@ function getDummyMission() {
   };
 }
 
+function pad(num, length) {
+  return num.toString().padStart(length, '0');
+}
+
 function prepareMission(state: State, current, mission) {
   const m = state.master.missions[mission.id];
   if (m === undefined) {
     return getDummyMission();
   }
+  let seconds = Math.max(0, (mission.end - current) / 1000);
+  const hours = Math.floor(seconds / 60 / 60);
+  seconds -= hours * 60 * 60;
+  const minutes = Math.floor(seconds / 60);
+  seconds -= minutes * 60;
+  seconds = Math.floor(seconds);
   return <Mission>{
     name: m.name,
-    timeLeft: `${mission.end - current}`,
+    timeLeft: `${pad(hours, 2)}:${pad(minutes, 2)}:${pad(seconds, 2)}`,
   };
 }
 
