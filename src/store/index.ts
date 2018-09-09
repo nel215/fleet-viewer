@@ -16,6 +16,9 @@ const store = new Vuex.Store({
     slotitems: {},
     decks: {},
     quests: {},
+    message: {
+      text: '',
+    },
   },
   mutations: {
     updateMaster(state, payload) {
@@ -48,6 +51,9 @@ const store = new Vuex.Store({
       payload.quests.forEach((quest) => {
         Vue.set(state.quests, quest.id, quest);
       });
+    },
+    updateMessage(state: State, payload) {
+      Vue.set(state, 'message', payload.message);
     },
   },
   actions,

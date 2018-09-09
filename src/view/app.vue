@@ -6,6 +6,7 @@
       <quest class="mdl-card mdl-cell mdl-cell--4-col mdl-cell--2-col-phone mdl-shadow--2dp"/>
       <missions class="mdl-card mdl-cell mdl-cell--4-col mdl-cell--2-col-phone mdl-shadow--2dp"/>
     </div>
+    <message/>
   </main>
 </div>
 </template>

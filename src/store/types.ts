@@ -9,12 +9,17 @@ export interface Master {
   missions: Object;
 }
 
+export interface Message {
+  text: string;
+}
+
 export interface State {
   master: Master;
   ships: Object;
   slotitems: Object;
   decks: Object;
   quests: Object;
+  message: Message;
 }
 
 export interface Quest {

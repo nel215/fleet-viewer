@@ -42,7 +42,8 @@ export default {
       })
       .catch((err) => {
         console.log(err);
-        // TODO: display error message
+        const text = 'There is no data. Please reload the game';
+        context.dispatch('handleMessage', { message: { text } });
       });
   },
   handlePort(context, payload) {
@@ -64,5 +65,11 @@ export default {
   handleDeck(context, payload) {
     console.log('deck');
     context.commit('updateDecks', { decks: payload.decks });
+  },
+  handleMessage(context, payload) {
+    context.commit('updateMessage', { message: payload.message });
+    setTimeout(() => {
+      context.commit('updateMessage', { message: { text: '' } });
+    }, 5000);
   },
 };
