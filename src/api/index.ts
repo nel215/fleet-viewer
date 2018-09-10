@@ -5,6 +5,7 @@ import GetData from './get-data';
 import RequireInfo from './require-info';
 import Questlist from './questlist';
 import Parser from './parser';
+import SlotItem from './slot-item';
 
 function parseBody(body) {
   assert(body.search(/^svdata=/) === 0);
@@ -32,6 +33,10 @@ export default {
     if (url.pathname === '/kcsapi/api_port/port') {
       const payload = Port.parse(body);
       return Object.assign({ type: 'handlePort' }, payload);
+    }
+    if (url.pathname === '/kcsapi/api_get_member/slot_item') {
+      const payload = SlotItem.parse(body);
+      return Object.assign({ type: 'handleSlotItem' }, payload);
     }
     if (url.pathname === '/kcsapi/api_get_member/ship_deck') {
       const ships = body.api_data.api_ship_data.map(d => Parser.parseShip(d));

@@ -26,6 +26,10 @@ export default {
     console.log('require info');
     context.commit('updateSlotitems', { slotitems: payload.slotitems });
   },
+  handleSlotItem(context, payload) {
+    console.log('slot item');
+    context.commit('updateSlotitems', { slotitems: payload.slotitems });
+  },
   initialize(context) {
     console.log('initialize');
     browser.storage.local
