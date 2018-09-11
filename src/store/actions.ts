@@ -32,6 +32,7 @@ export default {
   },
   initialize(context) {
     console.log('initialize');
+    context.dispatch('connect');
     browser.storage.local
       .get('/kcsapi/api_start2/getData')
       .then((payload) => {
@@ -42,7 +43,6 @@ export default {
       .then((payload) => {
         const action = API.createAction(payload['/kcsapi/api_get_member/require_info']);
         context.dispatch(action);
-        context.dispatch('connect');
       })
       .catch((err) => {
         console.log(err);
