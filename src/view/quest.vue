@@ -8,7 +8,9 @@
       <th class="mdl-data-table__cell--non-numeric">Title</th>
     </thead>
     <tr v-for="quest in selectedQuests">
-      <td class="mdl-data-table__cell--non-numeric">{{ quest.title }}</td>
+      <td class="mdl-data-table__cell--non-numeric">
+        <span :class="`box-200 ${quest.color}`">{{ quest.title }}</span>
+      </td>
     </tr>
   </table>
 </div>

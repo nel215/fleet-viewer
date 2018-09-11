@@ -9,6 +9,7 @@ export default {
         page,
         title: d.api_title,
         detail: d.api_detail,
+        category: d.api_category,
         state: d.api_state,
         progress: d.api_progress_flag,
       },

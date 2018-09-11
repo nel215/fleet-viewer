@@ -22,10 +22,19 @@ export interface State {
   message: Message;
 }
 
+export enum QuestCategory {
+  Formation = 1,
+  Sally = 2,
+  Expedition = 4,
+}
+
 export interface Quest {
   id: number;
-  title: string;
   page: number;
+  title: string;
+  detail: string;
+  category: QuestCategory;
+  state: number; // TODO: Change to enum
 }
 
 export interface Ship {
