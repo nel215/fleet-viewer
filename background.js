@@ -10,11 +10,9 @@ function handleConnect(port) {
 browser.runtime.onConnect.addListener(handleConnect);
 
 function tryCache(url, body) {
-  let tried = false;
   const cachePaths = ['/kcsapi/api_start2/getData', '/kcsapi/api_get_member/require_info'];
   cachePaths.forEach((path) => {
     if (url.endsWith(path)) {
-      tried = true;
       browser.storage.local.set({ [path]: { url, body } }).then(
         () => {
           console.log('set', path);
@@ -27,7 +25,6 @@ function tryCache(url, body) {
       );
     }
   });
-  return tried;
 }
 
 function handleBeforeRequest(details) {
@@ -49,10 +46,7 @@ function handleBeforeRequest(details) {
   filter.onstop = () => {
     console.log('finished');
     try {
-      if (tryCache(details.url, body)) {
-        filter.disconnect();
-        return;
-      }
+      tryCache(details.url, body);
       Object.values(ports).forEach((port) => {
         port.postMessage({
           url: details.url,
