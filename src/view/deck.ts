@@ -40,7 +40,6 @@ export default Vue.extend({
       return deck.shipIds;
     },
     airPower(): number {
-      console.log('airPower', this.deckId);
       const { state } = this.$store;
       if (!(this.deckId in state.decks)) {
         return 0;
