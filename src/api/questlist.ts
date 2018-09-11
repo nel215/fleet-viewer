@@ -1,4 +1,4 @@
-import { Quest, QuestlistPayload } from '../store/types';
+import { Quest } from '../store/types';
 
 export default {
   parse(body) {
