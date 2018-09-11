@@ -64,7 +64,7 @@ function handleBeforeRequest(details) {
 browser.webRequest.onBeforeRequest.addListener(
   handleBeforeRequest,
   {
-    urls: ['http://203.104.209.55/*'],
+    urls: ['http://203.104.209.55/kcsapi/*'],
     types: ['xmlhttprequest'],
   },
   ['blocking'],
