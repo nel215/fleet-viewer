@@ -28,20 +28,20 @@ export default {
     }
     if (url.pathname === '/kcsapi/api_get_member/questlist') {
       const payload = Questlist.parse(body);
-      return Object.assign({ type: 'handleQuestList' }, payload);
+      return Object.assign({ type: 'update' }, payload);
     }
     if (url.pathname === '/kcsapi/api_port/port') {
       const payload = Port.parse(body);
-      return Object.assign({ type: 'handlePort' }, payload);
+      return Object.assign({ type: 'update' }, payload);
     }
     if (url.pathname === '/kcsapi/api_get_member/slot_item') {
       const payload = SlotItem.parse(body);
-      return Object.assign({ type: 'handleSlotItem' }, payload);
+      return Object.assign({ type: 'update' }, payload);
     }
     if (url.pathname === '/kcsapi/api_get_member/ship_deck') {
       const ships = body.api_data.api_ship_data.map(d => Parser.parseShip(d));
       return {
-        type: 'handleShipDeck',
+        type: 'update',
         ships,
       };
     }
@@ -49,7 +49,7 @@ export default {
       const ships = body.api_data.api_ship_data.map(d => Parser.parseShip(d));
       const decks = body.api_data.api_deck_data.map(d => Parser.parseDeck(d));
       return {
-        type: 'handleShip3',
+        type: 'update',
         ships,
         decks,
       };
@@ -57,7 +57,7 @@ export default {
     if (url.pathname === '/kcsapi/api_get_member/deck') {
       const decks = body.api_data.map(d => Parser.parseDeck(d));
       return {
-        type: 'handleDeck',
+        type: 'update',
         decks,
       };
     }

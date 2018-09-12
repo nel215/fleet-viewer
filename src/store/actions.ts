@@ -18,10 +18,6 @@ export default {
       context.dispatch(action);
     });
   },
-  handleSlotItem(context, payload) {
-    console.log('slot item');
-    context.commit('updateSlotitems', { slotitems: payload.slotitems });
-  },
   initialize(context) {
     console.log('initialize');
     context.dispatch('connect');
@@ -42,26 +38,6 @@ export default {
         context.dispatch('handleMessage', { message: { text } });
       });
   },
-  handlePort(context, payload) {
-    console.log('port');
-    context.commit('updateShips', { ships: payload.ships });
-    context.commit('updateDecks', { decks: payload.decks });
-  },
-  handleShip3(context, payload) {
-    console.log('ship3');
-    context.commit('updateShips', { ships: payload.ships });
-    context.commit('updateDecks', { decks: payload.decks });
-  },
-  handleShipDeck(context, payload) {
-    context.commit('updateShips', { ships: payload.ships });
-  },
-  handleQuestList(context, payload) {
-    context.commit('updateQuests', payload);
-  },
-  handleDeck(context, payload) {
-    console.log('deck');
-    context.commit('updateDecks', { decks: payload.decks });
-  },
   update(context, payload) {
     console.log('update');
     if (payload.master !== undefined) {
@@ -69,6 +45,15 @@ export default {
     }
     if (payload.slotitems !== undefined) {
       context.commit('updateSlotitems', { slotitems: payload.slotitems });
+    }
+    if (payload.ships !== undefined) {
+      context.commit('updateShips', { ships: payload.ships });
+    }
+    if (payload.decks !== undefined) {
+      context.commit('updateDecks', { decks: payload.decks });
+    }
+    if (payload.quests !== undefined) {
+      context.commit('updateQuests', { quests: payload.quests });
     }
   },
   handleMessage(context, payload) {
