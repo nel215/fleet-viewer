@@ -54,9 +54,11 @@ function parse(body) {
   const ships = parseShips(body.api_data.api_mst_ship);
   const missions = parseMissions(body.api_data.api_mst_mission);
   return {
-    ships,
-    slotitems,
-    missions,
+    master: {
+      ships,
+      slotitems,
+      missions,
+    },
   };
 }
 

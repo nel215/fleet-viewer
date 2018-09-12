@@ -11,11 +11,8 @@ export default {
       name: uuid(),
     });
     port.onMessage.addListener((message) => {
-      const action = API.createAction(message);
-      if (action === null) {
-        return;
-      }
-      context.dispatch(action);
+      const payload = API.parse(message);
+      context.dispatch(Object.assign({ type: 'update' }, payload));
     });
   },
   initialize(context) {
@@ -23,14 +20,14 @@ export default {
     context.dispatch('connect');
     browser.storage.local
       .get('/kcsapi/api_start2/getData')
-      .then((payload) => {
-        const action = API.createAction(payload['/kcsapi/api_start2/getData']);
-        context.dispatch(action);
+      .then((value) => {
+        const payload = API.parse(value['/kcsapi/api_start2/getData']);
+        context.dispatch(Object.assign({ type: 'update' }, payload));
         return browser.storage.local.get('/kcsapi/api_get_member/require_info');
       })
-      .then((payload) => {
-        const action = API.createAction(payload['/kcsapi/api_get_member/require_info']);
-        context.dispatch(action);
+      .then((value) => {
+        const payload = API.parse(value['/kcsapi/api_get_member/require_info']);
+        context.dispatch(Object.assign({ type: 'update' }, payload));
       })
       .catch((err) => {
         console.log(err);
@@ -53,7 +50,7 @@ export default {
       context.commit('updateDecks', { decks: payload.decks });
     }
     if (payload.quests !== undefined) {
-      context.commit('updateQuests', { quests: payload.quests });
+      context.commit('updateQuests', payload);
     }
   },
   handleMessage(context, payload) {

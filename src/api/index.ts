@@ -13,35 +13,34 @@ function parseBody(body) {
 }
 
 export default {
-  createAction(message) {
+  parse(message) {
     const url = URL.parse(message.url);
     console.log(url);
     const body = parseBody(message.body);
     console.log(body);
     if (url.pathname === '/kcsapi/api_start2/getData') {
       const master = GetData.parse(body);
-      return { type: 'update', master };
+      return master;
     }
     if (url.pathname === '/kcsapi/api_get_member/require_info') {
       const payload = RequireInfo.parse(body);
-      return Object.assign({ type: 'update' }, payload);
+      return payload;
     }
     if (url.pathname === '/kcsapi/api_get_member/questlist') {
       const payload = Questlist.parse(body);
-      return Object.assign({ type: 'update' }, payload);
+      return payload;
     }
     if (url.pathname === '/kcsapi/api_port/port') {
       const payload = Port.parse(body);
-      return Object.assign({ type: 'update' }, payload);
+      return payload;
     }
     if (url.pathname === '/kcsapi/api_get_member/slot_item') {
       const payload = SlotItem.parse(body);
-      return Object.assign({ type: 'update' }, payload);
+      return payload;
     }
     if (url.pathname === '/kcsapi/api_get_member/ship_deck') {
       const ships = body.api_data.api_ship_data.map(d => Parser.parseShip(d));
       return {
-        type: 'update',
         ships,
       };
     }
@@ -49,7 +48,6 @@ export default {
       const ships = body.api_data.api_ship_data.map(d => Parser.parseShip(d));
       const decks = body.api_data.api_deck_data.map(d => Parser.parseDeck(d));
       return {
-        type: 'update',
         ships,
         decks,
       };
@@ -57,10 +55,9 @@ export default {
     if (url.pathname === '/kcsapi/api_get_member/deck') {
       const decks = body.api_data.map(d => Parser.parseDeck(d));
       return {
-        type: 'update',
         decks,
       };
     }
-    return null;
+    return {};
   },
 };
