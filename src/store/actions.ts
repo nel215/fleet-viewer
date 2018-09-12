@@ -18,14 +18,6 @@ export default {
       context.dispatch(action);
     });
   },
-  handleGetData(context, payload) {
-    console.log('get data');
-    context.commit('updateMaster', { master: payload.master });
-  },
-  handleRequreInfo(context, payload) {
-    console.log('require info');
-    context.commit('updateSlotitems', { slotitems: payload.slotitems });
-  },
   handleSlotItem(context, payload) {
     console.log('slot item');
     context.commit('updateSlotitems', { slotitems: payload.slotitems });
@@ -69,6 +61,15 @@ export default {
   handleDeck(context, payload) {
     console.log('deck');
     context.commit('updateDecks', { decks: payload.decks });
+  },
+  update(context, payload) {
+    console.log('update');
+    if (payload.master !== undefined) {
+      context.commit('updateMaster', { master: payload.master });
+    }
+    if (payload.slotitems !== undefined) {
+      context.commit('updateSlotitems', { slotitems: payload.slotitems });
+    }
   },
   handleMessage(context, payload) {
     context.commit('updateMessage', { message: payload.message });

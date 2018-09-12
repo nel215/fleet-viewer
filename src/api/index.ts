@@ -20,11 +20,11 @@ export default {
     console.log(body);
     if (url.pathname === '/kcsapi/api_start2/getData') {
       const master = GetData.parse(body);
-      return { type: 'handleGetData', master };
+      return { type: 'update', master };
     }
     if (url.pathname === '/kcsapi/api_get_member/require_info') {
       const payload = RequireInfo.parse(body);
-      return Object.assign({ type: 'handleRequreInfo' }, payload);
+      return Object.assign({ type: 'update' }, payload);
     }
     if (url.pathname === '/kcsapi/api_get_member/questlist') {
       const payload = Questlist.parse(body);
