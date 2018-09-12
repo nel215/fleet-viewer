@@ -18,7 +18,7 @@ export interface State {
   ships: Object;
   slotitems: Object;
   decks: Object;
-  quests: Object;
+  quests: Record<number, Quest>;
   message: Message;
 }
 

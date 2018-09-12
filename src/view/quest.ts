@@ -1,9 +1,6 @@
+import Vue from 'vue';
 import { mapState } from 'vuex';
 import { State, Quest, QuestCategory } from '../store/types';
-
-function isSelected(quest) {
-  return quest.state === 2 || quest.state === 3;
-}
 
 interface QuestViewModel {
   title: string;
@@ -27,24 +24,19 @@ function getColor(quest: Quest): string {
   return 'mdl-color--grey-400 mdl-color-text--white';
 }
 
-export default {
-  computed: mapState({
-    selectedQuests(state: State) {
-      const selected: Array<QuestViewModel> = [];
-      Object.values(state.quests).forEach((quest) => {
-        if (!isSelected(quest)) {
-          return;
-        }
-        selected.push({
-          title: quest.title,
-          color: getColor(quest),
-        });
-      });
+export default Vue.extend({
+  computed: {
+    selectedQuests(): Array<QuestViewModel> {
+      const selected = this.$store.getters.selectedQuests.map(quest => ({
+        title: quest.title,
+        color: getColor(quest),
+      }));
+
       while (selected.length < 6) {
         selected.push(createDummy());
       }
       console.log(selected);
       return selected;
     },
-  }),
-};
+  },
+});

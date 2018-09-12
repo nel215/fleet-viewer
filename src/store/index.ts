@@ -2,6 +2,7 @@ import Vue from 'vue';
 import Vuex from 'vuex';
 import actions from './actions';
 import { State, Quest, QuestlistPayload } from './types';
+import getSelectedQuests from '../usecase/quest';
 
 Vue.use(Vuex);
 
@@ -19,6 +20,9 @@ const store = new Vuex.Store({
     message: {
       text: '',
     },
+  },
+  getters: {
+    selectedQuests: state => getSelectedQuests(state.quests),
   },
   mutations: {
     updateMaster(state, payload) {
