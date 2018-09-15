@@ -6,6 +6,7 @@ import RequireInfo from './require-info';
 import Questlist from './questlist';
 import Parser from './parser';
 import SlotItem from './slot-item';
+import Map from './map';
 
 function parseBody(body) {
   assert(body.search(/^svdata=/) === 0);
@@ -56,6 +57,13 @@ export default {
       const decks = body.api_data.map(d => Parser.parseDeck(d));
       return {
         decks,
+      };
+    }
+    if (url.pathname === '/kcsapi/api_get_member/mapinfo') {
+      // TODO:
+      const maps = Map.parse(body.api_data.api_map_info);
+      return {
+        maps,
       };
     }
     return {};
