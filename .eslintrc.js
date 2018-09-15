@@ -6,7 +6,7 @@ module.exports = {
     'no-new': 'off',
     'no-console': 'off',
     'no-restricted-globals': [0, 'name'],
-    'camelcase': 'off',
+    camelcase: 'off',
   },
   overrides: [
     {
