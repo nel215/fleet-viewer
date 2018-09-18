@@ -1,5 +1,6 @@
 <template>
-<div class="mdl-layout mdl-js-layout">
+<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+  <Header/>
   <main class="mdl-layout__content mdl-color--grey-100">
     <div class="mdl-grid">
       <decks class="mdl-card mdl-cell mdl-cell--8-col mdl-cell--4-col-phone mdl-shadow--2dp"/>
