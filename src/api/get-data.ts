@@ -49,15 +49,29 @@ function parseMissions(data) {
   }, {});
 }
 
+function parseMap(data) {
+  return data.reduce((a, d) => {
+    const m = {
+      id: d.api_id,
+      name: d.api_name,
+      operation: d.api_opetext,
+    };
+    Object.assign(a, { [m.id]: m }, {});
+    return a;
+  }, {});
+}
+
 function parse(body) {
   const slotitems = parseSlotitems(body.api_data.api_mst_slotitem);
   const ships = parseShips(body.api_data.api_mst_ship);
   const missions = parseMissions(body.api_data.api_mst_mission);
+  const maps = parseMap(body.api_data.api_mst_mapinfo);
   return {
     master: {
       ships,
       slotitems,
       missions,
+      maps,
     },
   };
 }
