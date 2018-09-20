@@ -1,7 +1,4 @@
-interface Map {
-  id: number;
-  isEvent: boolean;
-}
+import { Map } from '../entity';
 
 interface EventMapResponse {
   api_now_maphp: number;

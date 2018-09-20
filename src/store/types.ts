@@ -1,3 +1,5 @@
+import { Map, Message } from '../entity';
+
 export interface QuestlistPayload {
   page: number;
   quests: Array<Quest>;
@@ -9,17 +11,13 @@ export interface Master {
   missions: Object;
 }
 
-export interface Message {
-  text: string;
-}
-
 export interface State {
   master: Master;
   ships: Object;
   slotitems: Object;
   decks: Object;
   quests: Record<number, Quest>;
-  maps: Record<number, any>;
+  maps: Record<number, Map>;
   message: Message;
 }
 
