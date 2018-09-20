@@ -4,6 +4,7 @@ import VueRouter from 'vue-router';
 
 import AppView from './view/app.vue';
 import HomeView from './view/home.vue';
+import SallyView from './view/sally.vue';
 import store from './store';
 
 import './stylus/index.styl';
@@ -13,7 +14,7 @@ Vue.use(VueMdl);
 Vue.use(VueRouter);
 
 const router = new VueRouter({
-  routes: [{ path: '/home', component: HomeView }],
+  routes: [{ path: '/home', component: HomeView }, { path: '/sally', component: SallyView }],
 });
 
 new Vue({
