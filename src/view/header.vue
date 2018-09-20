@@ -4,8 +4,8 @@
     <span class="mdl-layout-title">Fleet Viewer</span>
     <div class="mdl-layout-spacer"></div>
     <nav class="mdl-navigation">
-      <a class="mdl-navigation__link" href="">Home</a>
-      <a class="mdl-navigation__link" href="">---</a>
+      <router-link class="mdl-navigation__link" to="/home">Home</router-link>
+      <router-link class="mdl-navigation__link" to="/sally">Sally</router-link>
       <a class="mdl-navigation__link" href="">---</a>
       <a class="mdl-navigation__link" href="">---</a>
       <a class="mdl-navigation__link" href="">---</a>

@@ -1,14 +1,7 @@
 <template>
 <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
   <Header/>
-  <main class="mdl-layout__content mdl-color--grey-100">
-    <div class="mdl-grid">
-      <decks class="mdl-card mdl-cell mdl-cell--8-col mdl-cell--4-col-phone mdl-shadow--2dp"/>
-      <quest class="mdl-card mdl-cell mdl-cell--4-col mdl-cell--2-col-phone mdl-shadow--2dp"/>
-      <missions class="mdl-card mdl-cell mdl-cell--4-col mdl-cell--2-col-phone mdl-shadow--2dp"/>
-    </div>
-    <message/>
-  </main>
+  <router-view></router-view>
 </div>
 </template>
 <script src="./app.js"></script>

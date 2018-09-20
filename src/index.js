@@ -3,6 +3,7 @@ import VueMdl from 'vue-mdl';
 import VueRouter from 'vue-router';
 
 import AppView from './view/app.vue';
+import HomeView from './view/home.vue';
 import store from './store';
 
 import './stylus/index.styl';
@@ -12,7 +13,7 @@ Vue.use(VueMdl);
 Vue.use(VueRouter);
 
 const router = new VueRouter({
-  // routes: [{ path: '/home', component: AppView }],
+  routes: [{ path: '/home', component: HomeView }],
 });
 
 new Vue({
@@ -21,6 +22,7 @@ new Vue({
   mounted() {
     console.log('mounted');
     store.dispatch('initialize');
+    router.push('/home');
   },
   router,
   render: h => h(AppView),
