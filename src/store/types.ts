@@ -19,6 +19,7 @@ export interface State {
   slotitems: Object;
   decks: Object;
   quests: Record<number, Quest>;
+  maps: Record<number, any>;
   message: Message;
 }
 

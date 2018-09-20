@@ -52,6 +52,9 @@ export default {
     if (payload.quests !== undefined) {
       context.commit('updateQuests', payload);
     }
+    if (payload.maps !== undefined) {
+      context.commit('updateMaps', payload);
+    }
   },
   handleMessage(context, payload) {
     context.commit('updateMessage', { message: payload.message });

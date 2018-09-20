@@ -17,6 +17,7 @@ const store = new Vuex.Store({
     slotitems: {},
     decks: {},
     quests: {},
+    maps: {},
     message: {
       text: '',
     },
@@ -58,6 +59,11 @@ const store = new Vuex.Store({
     },
     updateMessage(state: State, payload) {
       Vue.set(state, 'message', payload.message);
+    },
+    updateMaps(state, payload) {
+      payload.maps.forEach((map) => {
+        Vue.set(state.maps, map.id, map);
+      });
     },
   },
   actions,
