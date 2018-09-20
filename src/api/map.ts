@@ -12,6 +12,21 @@ interface MapInfoResponse {
   api_eventmap: EventMapResponse;
 }
 
+function merge(maps: Record<number, any>, mapMasters: Record<number, any>) {
+  const res = {};
+  Object.values(maps).forEach((m) => {
+    const mas = mapMasters[m.id] || {
+      name: '-',
+      operation: '-',
+    };
+    res[m.id] = <Map>Object.assign({}, m, {
+      name: mas.name,
+      operation: mas.operation,
+    });
+  });
+  return res;
+}
+
 function parse(data: Array<MapInfoResponse>) {
   return data.map((d) => {
     const isEvent = d.api_eventmap !== undefined;
@@ -41,4 +56,5 @@ function parse(data: Array<MapInfoResponse>) {
 
 export default {
   parse,
+  merge,
 };

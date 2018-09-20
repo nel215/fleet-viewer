@@ -9,6 +9,7 @@ export interface Master {
   ships: Object;
   slotitems: Object;
   missions: Object;
+  maps: Record<number, any>;
 }
 
 export interface State {

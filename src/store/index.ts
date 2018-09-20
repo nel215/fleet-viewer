@@ -4,6 +4,7 @@ import actions from './actions';
 import { State, Quest, QuestlistPayload } from './types';
 import getSelectedQuests from '../usecase/quest';
 import getUnclearedEventMaps from '../usecase/map';
+import APIMap from '../api/map';
 
 Vue.use(Vuex);
 
@@ -25,7 +26,8 @@ const store = new Vuex.Store({
   },
   getters: {
     selectedQuests: state => getSelectedQuests(state.quests),
-    unclearedEventMaps: state => getUnclearedEventMaps(state.maps),
+    maps: state => APIMap.merge(state.maps, state.master.maps),
+    unclearedEventMaps: (state, getters) => getUnclearedEventMaps(getters.maps),
   },
   mutations: {
     updateMaster(state, payload) {
