@@ -47,8 +47,10 @@ export default {
     }
     if (url.pathname === '/kcsapi/api_get_member/ship_deck') {
       const ships = body.api_data.api_ship_data.map(d => parseShip(d));
+      const decks = body.api_data.api_deck_data.map(d => parseDeck(d));
       return {
         ships,
+        decks,
       };
     }
     if (url.pathname === '/kcsapi/api_get_member/ship3') {
