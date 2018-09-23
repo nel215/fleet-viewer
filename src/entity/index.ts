@@ -42,9 +42,14 @@ export interface Ship {
 }
 
 export enum QuestCategory {
-  Formation = 1,
-  Sally = 2,
+  Composition = 1,
+  Sortie = 2,
+  Exercise = 3,
   Expedition = 4,
+  Supply = 5,
+  Arsenal = 6,
+  Modernization = 7,
+  ExtraSortie = 8,
 }
 
 export interface Quest {

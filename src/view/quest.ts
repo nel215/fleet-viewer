@@ -16,12 +16,28 @@ function createDummy(): QuestViewModel {
 }
 
 function getColor(quest: Quest): string {
-  if (quest.category === QuestCategory.Sally) {
+  if (quest.category === QuestCategory.Composition) {
+    return 'mdl-color--teal-600 mdl-color-text--white';
+  }
+  if (quest.category === QuestCategory.Sortie || quest.category === QuestCategory.ExtraSortie) {
     return 'mdl-color--red-600 mdl-color-text--white';
+  }
+  if (quest.category === QuestCategory.Exercise) {
+    return 'mdl-color-light_green-700 mdl-color-text--white';
   }
   if (quest.category === QuestCategory.Expedition) {
     return 'mdl-color--blue-600 mdl-color-text--white';
   }
+  if (quest.category === QuestCategory.Supply) {
+    return 'mdl-color--yellow-800 mdl-color-text--white';
+  }
+  if (quest.category === QuestCategory.Arsenal) {
+    return 'mdl-color--brown-600 mdl-color-text--white';
+  }
+  if (quest.category === QuestCategory.Modernization) {
+    return 'mdl-color--purple-600 mdl-color-text--white';
+  }
+
   return 'mdl-color--grey-400 mdl-color-text--white';
 }
 
