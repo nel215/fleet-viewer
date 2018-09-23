@@ -1,6 +1,7 @@
 import uuid from 'uuid/v4';
 import Vue from 'vue';
 import { State } from '../store/types';
+import { Ship } from '../entity';
 
 interface Slotitem {
   id: string;
@@ -8,7 +9,7 @@ interface Slotitem {
   shortName: String;
 }
 
-interface Ship {
+interface ShipViewModel {
   name: String;
   lv: Number;
   hp: Number;
@@ -68,7 +69,7 @@ function createDummySlotitem() {
 }
 
 function createDummyShip() {
-  return <Ship>{
+  return <ShipViewModel>{
     name: '-',
     lv: 0,
     hp: 0,
@@ -118,19 +119,19 @@ export default Vue.extend({
   computed: {
     ship(): Object {
       const { state } = this.$store;
-      const ship = this.$store.getters.getShipById(this.shipId);
+      const ship: Ship = this.$store.getters.getShipById(this.shipId);
       if (ship === undefined) {
         return createDummyShip();
       }
       const fuelPercentage = `${Math.floor((ship.fuel / ship.maxFuel) * 100)}%`;
       const bulletPercentage = `${Math.floor((ship.bullet / ship.maxBullet) * 100)}%`;
-      const hpColor = getHpColor(ship.hp, ship.maxhp);
+      const hpColor = getHpColor(ship.hp, ship.maxHp);
       const fuelColor = getFuelOrBulletColor(ship.fuel, ship.maxFuel);
       const bulletColor = getFuelOrBulletColor(ship.bullet, ship.maxBullet);
 
       const slotitems = createSlotitemsByIds(state, ship.slot);
 
-      return <Ship>{
+      return <ShipViewModel>{
         name: ship.name,
         lv: ship.lv,
         hp: ship.hp,
