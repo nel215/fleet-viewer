@@ -1,3 +1,5 @@
+import { Ship } from '../entity';
+
 interface ShipResponse {
   api_id: number;
   api_ship_id: number;
@@ -11,10 +13,15 @@ interface ShipResponse {
   api_slot: Array<number>;
 }
 
-export interface Ship {}
+export interface APIShip {
+  id: number;
+  shipId: number;
+  fuel: number;
+  bullet: number;
+}
 
 export function parseShip(data: ShipResponse) {
-  return <Ship>{
+  return <APIShip>{
     id: data.api_id,
     shipId: data.api_ship_id,
     lv: data.api_lv,
@@ -26,6 +33,37 @@ export function parseShip(data: ShipResponse) {
     los: data.api_sakuteki[0],
     slot: data.api_slot,
   };
+}
+
+export function mergeShips(
+  ships: Record<number, APIShip>,
+  masterShips: Record<number, any>,
+): Record<number, Ship> {
+  return Object.values(ships).reduce((a, s) => {
+    if (s.shipId in masterShips) {
+      const m = masterShips[s.shipId];
+      const res: Ship = {
+        id: s.id,
+        fuel: s.fuel,
+        bullet: s.bullet,
+        los: m.los,
+        maxFuel: m.maxFuel,
+        maxBullet: m.maxBullet,
+        maxSpaces: m.maxSpaces,
+      };
+      return Object.assign(a, { [res.id]: res });
+    }
+    const res: Ship = {
+      id: s.id,
+      fuel: s.fuel,
+      bullet: s.bullet,
+      los: NaN,
+      maxFuel: NaN,
+      maxBullet: NaN,
+      maxSpaces: [],
+    };
+    return Object.assign(a, { [res.id]: res });
+  }, {});
 }
 
 export default {

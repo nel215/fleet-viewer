@@ -9,10 +9,12 @@ export interface Map {
 
 export interface Ship {
   id: number;
-  shipId: number;
   fuel: number;
   bullet: number;
   los: number;
+  maxFuel: number;
+  maxBullet: number;
+  maxSpaces: Array<number>;
 }
 
 export interface Message {

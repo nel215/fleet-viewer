@@ -1,5 +1,5 @@
 import { Map, Message } from '../entity';
-import { Ship } from '../api/ship';
+import { APIShip } from '../api/ship';
 
 export interface QuestlistPayload {
   page: number;
@@ -15,7 +15,7 @@ export interface Master {
 
 export interface State {
   master: Master;
-  ships: Record<number, Ship>;
+  ships: Record<number, APIShip>;
   slotitems: Object;
   decks: Object;
   quests: Record<number, Quest>;
