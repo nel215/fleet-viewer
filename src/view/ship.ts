@@ -12,7 +12,7 @@ interface Ship {
   name: String;
   lv: Number;
   hp: Number;
-  maxhp: Number;
+  maxHp: Number;
   hpColor: string;
   cond: Number;
   fuel: number;
@@ -72,7 +72,7 @@ function createDummyShip() {
     name: '-',
     lv: 0,
     hp: 0,
-    maxhp: 0,
+    maxHp: 0,
     hpColor: getHpColor(0, 0),
     cond: 0,
     fuel: 0,
@@ -118,33 +118,31 @@ export default Vue.extend({
   computed: {
     ship(): Object {
       const { state } = this.$store;
-      if (!(this.shipId in state.ships)) {
+      const ship = this.$store.getters.getShipById(this.shipId);
+      if (ship === undefined) {
         return createDummyShip();
       }
-      const ship = state.ships[this.shipId];
-      if (!(ship.shipId in state.master.ships)) {
-        return createDummyShip();
-      }
-      const m = state.master.ships[ship.shipId];
-      const slotitems = createSlotitemsByIds(state, ship.slot);
+      const fuelPercentage = `${Math.floor((ship.fuel / ship.maxFuel) * 100)}%`;
+      const bulletPercentage = `${Math.floor((ship.bullet / ship.maxBullet) * 100)}%`;
       const hpColor = getHpColor(ship.hp, ship.maxhp);
-      const fuelPercentage = `${Math.floor((ship.fuel / m.maxFuel) * 100)}%`;
-      const bulletPercentage = `${Math.floor((ship.bullet / m.maxBullet) * 100)}%`;
-      const fuelColor = getFuelOrBulletColor(ship.fuel, m.maxFuel);
-      const bulletColor = getFuelOrBulletColor(ship.bullet, m.maxBullet);
+      const fuelColor = getFuelOrBulletColor(ship.fuel, ship.maxFuel);
+      const bulletColor = getFuelOrBulletColor(ship.bullet, ship.maxBullet);
+
+      const slotitems = createSlotitemsByIds(state, ship.slot);
+
       return <Ship>{
-        name: m.name,
+        name: ship.name,
         lv: ship.lv,
         hp: ship.hp,
         hpColor,
-        maxhp: ship.maxhp,
+        maxHp: ship.maxHp,
         cond: ship.cond,
         bullet: ship.bullet,
-        maxBullet: m.maxBullet,
+        maxBullet: ship.maxBullet,
         bulletPercentage,
         bulletColor,
         fuel: ship.fuel,
-        maxFuel: m.maxFuel,
+        maxFuel: ship.maxFuel,
         fuelPercentage,
         fuelColor,
         slotitems,

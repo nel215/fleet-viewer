@@ -9,9 +9,15 @@ export interface Map {
 
 export interface Ship {
   id: number;
+  name: string;
+  lv: number;
   fuel: number;
   bullet: number;
   los: number;
+  cond: number;
+  hp: number;
+  maxHp: number;
+  slot: Array<number>;
   maxFuel: number;
   maxBullet: number;
   maxSpaces: Array<number>;

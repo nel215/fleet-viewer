@@ -16,8 +16,13 @@ interface ShipResponse {
 export interface APIShip {
   id: number;
   shipId: number;
+  lv: number;
+  hp: number;
+  maxHp: number;
+  cond: number;
   fuel: number;
   bullet: number;
+  slot: Array<number>;
 }
 
 export function parseShip(data: ShipResponse) {
@@ -26,7 +31,7 @@ export function parseShip(data: ShipResponse) {
     shipId: data.api_ship_id,
     lv: data.api_lv,
     hp: data.api_nowhp,
-    maxhp: data.api_maxhp,
+    maxHp: data.api_maxhp,
     fuel: data.api_fuel,
     bullet: data.api_bull,
     cond: data.api_cond,
@@ -44,8 +49,14 @@ export function mergeShips(
       const m = masterShips[s.shipId];
       const res: Ship = {
         id: s.id,
+        name: m.name,
+        lv: s.lv,
+        hp: s.hp,
+        maxHp: s.maxHp,
+        cond: s.cond,
         fuel: s.fuel,
         bullet: s.bullet,
+        slot: s.slot,
         los: m.los,
         maxFuel: m.maxFuel,
         maxBullet: m.maxBullet,
@@ -55,8 +66,14 @@ export function mergeShips(
     }
     const res: Ship = {
       id: s.id,
+      name: '-',
+      lv: s.lv,
+      hp: s.hp,
+      maxHp: s.maxHp,
+      cond: s.cond,
       fuel: s.fuel,
       bullet: s.bullet,
+      slot: s.slot,
       los: NaN,
       maxFuel: NaN,
       maxBullet: NaN,

@@ -6,7 +6,7 @@ import Questlist from './questlist';
 import Parser from './parser';
 import SlotItem from './slot-item';
 import Map from './map';
-import { parseShip } from './ship';
+import { parseShip, mergeShips } from './ship';
 
 function parseBody(body) {
   assert(body.search(/^svdata=/) === 0);
@@ -14,6 +14,7 @@ function parseBody(body) {
 }
 
 export default {
+  mergeShips,
   parse(message) {
     const url = URL.parse(message.url);
     console.log(url);

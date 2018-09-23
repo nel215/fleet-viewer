@@ -2,7 +2,7 @@
 <tr>
   <td class="mdl-data-table__cell--non-numeric">{{ ship.name }}</td>
   <td>{{ ship.lv }}</td>
-  <td><span :class="`box-56 ${ship.hpColor}`">{{ ship.hp }}/{{ ship.maxhp }}</span></td>
+  <td><span :class="`box-56 ${ship.hpColor}`">{{ ship.hp }}/{{ ship.maxHp }}</span></td>
   <td>{{ ship.cond }}</td>
   <td><span :class="`box-40 ${ship.fuelColor}`">{{ ship.fuelPercentage }}</span></td>
   <td><span :class="`box-40 ${ship.bulletColor}`">{{ ship.bulletPercentage }}</span></td>
