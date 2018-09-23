@@ -23,11 +23,10 @@ export default {
       .then((value) => {
         const payload = API.parse(value['/kcsapi/api_start2/getData']);
         context.dispatch(Object.assign({ type: 'update' }, payload));
-        return browser.storage.local.get('/kcsapi/api_get_member/require_info');
+        return browser.storage.local.get('slotitems');
       })
       .then((value) => {
-        const payload = API.parse(value['/kcsapi/api_get_member/require_info']);
-        context.dispatch(Object.assign({ type: 'update' }, payload));
+        context.commit('updateSlotitems', value);
       })
       .catch((err) => {
         console.log(err);
@@ -41,6 +40,10 @@ export default {
       context.commit('updateMaster', { master: payload.master });
     }
     if (payload.slotitems !== undefined) {
+      context.dispatch({
+        type: 'store',
+        value: { slotitems: payload.slotitems },
+      });
       context.commit('updateSlotitems', { slotitems: payload.slotitems });
     }
     if (payload.ships !== undefined) {
@@ -55,6 +58,17 @@ export default {
     if (payload.maps !== undefined) {
       context.commit('updateMaps', payload);
     }
+  },
+  store(context, payload) {
+    const { value } = payload;
+    browser.storage.local.set(value).then(
+      () => {
+        console.log('set', Object.keys(value));
+      },
+      (e) => {
+        console.log(e);
+      },
+    );
   },
   handleMessage(context, payload) {
     context.commit('updateMessage', { message: payload.message });

@@ -10,7 +10,7 @@ function handleConnect(port) {
 browser.runtime.onConnect.addListener(handleConnect);
 
 function tryCache(url, body) {
-  const cachePaths = ['/kcsapi/api_start2/getData', '/kcsapi/api_get_member/require_info'];
+  const cachePaths = ['/kcsapi/api_start2/getData'];
   cachePaths.forEach((path) => {
     if (url.endsWith(path)) {
       browser.storage.local.set({ [path]: { url, body } }).then(
