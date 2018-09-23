@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import ShipView from './ship.vue';
-import { SlotitemMaster, ShipMaster, ItemType } from '../store/types';
+import { SlotitemMaster, ShipMaster } from '../store/types';
+import { ItemType } from '../api/slot-item';
 
 export default Vue.extend({
   props: {
