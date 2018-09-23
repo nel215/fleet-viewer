@@ -12,6 +12,8 @@ interface ShipResponse {
   api_cond: number;
   api_sakuteki: Array<number>;
   api_slot: Array<number>;
+  api_onslot: Array<number>;
+  api_slot_ex: number;
 }
 
 export interface APIShip {
@@ -24,6 +26,8 @@ export interface APIShip {
   fuel: number;
   bullet: number;
   slot: Array<number>;
+  api_onslot: Array<number>;
+  api_slot_ex: number;
 }
 
 export function parseShip(data: ShipResponse) {
@@ -38,6 +42,8 @@ export function parseShip(data: ShipResponse) {
     cond: data.api_cond,
     los: data.api_sakuteki[0],
     slot: data.api_slot,
+    api_onslot: data.api_onslot,
+    api_slot_ex: data.api_slot_ex,
   };
 }
 
