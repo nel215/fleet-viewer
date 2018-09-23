@@ -7,6 +7,14 @@ export interface Map {
   cleared: boolean;
 }
 
+export interface Ship {
+  id: number;
+  shipId: number;
+  fuel: number;
+  bullet: number;
+  los: number;
+}
+
 export interface Message {
   text: string;
 }

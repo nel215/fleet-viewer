@@ -1,4 +1,5 @@
 import { Map, Message } from '../entity';
+import { Ship } from '../api/ship';
 
 export interface QuestlistPayload {
   page: number;
@@ -14,7 +15,7 @@ export interface Master {
 
 export interface State {
   master: Master;
-  ships: Object;
+  ships: Record<number, Ship>;
   slotitems: Object;
   decks: Object;
   quests: Record<number, Quest>;
@@ -35,14 +36,6 @@ export interface Quest {
   detail: string;
   category: QuestCategory;
   state: number; // TODO: Change to enum
-}
-
-export interface Ship {
-  id: number;
-  shipId: number;
-  fuel: number;
-  bullet: number;
-  los: number;
 }
 
 export interface Mission {

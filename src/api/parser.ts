@@ -1,19 +1,4 @@
-import { Ship, Deck, Mission } from '../store/types';
-
-export function parseShip(data) {
-  return <Ship>{
-    id: data.api_id,
-    shipId: data.api_ship_id,
-    lv: data.api_lv,
-    hp: data.api_nowhp,
-    maxhp: data.api_maxhp,
-    fuel: data.api_fuel,
-    bullet: data.api_bull,
-    cond: data.api_cond,
-    los: data.api_sakuteki[0],
-    slot: data.api_slot,
-  };
-}
+import { Deck, Mission } from '../store/types';
 
 function parseMission(data) {
   return <Mission>{
@@ -32,6 +17,5 @@ export function parseDeck(data) {
 }
 
 export default {
-  parseShip,
   parseDeck,
 };
