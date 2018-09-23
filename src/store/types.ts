@@ -1,7 +1,7 @@
 import { Map, Message } from '../entity';
 import { APIShip } from '../api/ship';
 import { APIDeck } from '../api/deck';
-import { APISlotitem } from '../api/slot-item';
+import { APISlotitem, ItemType } from '../api/slot-item';
 
 export interface QuestlistPayload {
   page: number;
@@ -63,13 +63,4 @@ export interface SlotitemMaster {
   type: ItemType;
   tyku: number;
   los: number;
-}
-
-export enum ItemType {
-  SmallCaliberMainGun = 1,
-  Fighter = 6,
-  DiveBomber = 7,
-  TorpedoBomber = 8,
-  SeaplaneBomber = 11,
-  SeaplaneFighter = 45,
 }

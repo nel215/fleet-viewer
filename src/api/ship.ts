@@ -1,6 +1,5 @@
 import { Ship, Slotitem } from '../entity';
-import { APISlotitem } from './slot-item';
-import { ItemType } from '../store/types';
+import { APISlotitem, ItemType } from './slot-item';
 
 interface ShipResponse {
   api_id: number;
