@@ -30,6 +30,7 @@ const store = new Vuex.Store({
     maps: state => APIMap.merge(state.maps, state.master.maps),
     ships: state => API.mergeShips(state.ships, state.master.ships),
     getShipById: (state, getters) => id => getters.ships[id],
+    decks: state => API.mergeDecks(state.decks, state.master),
     unclearedEventMaps: (state, getters) => getUnclearedEventMaps(getters.maps),
   },
   mutations: {

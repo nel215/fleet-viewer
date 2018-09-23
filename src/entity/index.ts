@@ -7,6 +7,17 @@ export interface Map {
   cleared: boolean;
 }
 
+export interface Mission {
+  name: string;
+  end: number;
+}
+
+export interface Deck {
+  id: number;
+  shipIds: Array<number>;
+  mission: Mission;
+}
+
 export interface Ship {
   id: number;
   name: string;

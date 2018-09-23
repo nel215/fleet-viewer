@@ -1,5 +1,5 @@
 import Vue from 'vue';
-import { State, Deck } from '../store/types';
+import { State } from '../store/types';
 
 interface Mission {
   name: string;
@@ -17,9 +17,8 @@ function pad(num, length) {
   return num.toString().padStart(length, '0');
 }
 
-function prepareMission(state: State, current, mission) {
-  const m = state.master.missions[mission.id];
-  if (m === undefined) {
+function prepareMission(current, mission): Mission {
+  if (mission === null) {
     return getDummyMission();
   }
   let seconds = Math.max(0, (mission.end - current) / 1000);
@@ -29,7 +28,7 @@ function prepareMission(state: State, current, mission) {
   seconds -= minutes * 60;
   seconds = Math.floor(seconds);
   return <Mission>{
-    name: m.name,
+    name: mission.name,
     timeLeft: `${pad(hours, 2)}:${pad(minutes, 2)}:${pad(seconds, 2)}`,
   };
 }
@@ -55,10 +54,9 @@ export default Vue.extend({
   },
   computed: {
     missions(): Array<Mission> {
-      const { state } = this.$store;
-      let decks: Array<Deck> = Object.values(state.decks);
+      let { decks } = this.$store.getters;
       decks = decks.filter(d => !isPrimary(d));
-      const missions = decks.map(deck => prepareMission(state, this.current, deck.mission));
+      const missions = decks.map(deck => prepareMission(this.current, deck.mission));
       while (missions.length < 3) {
         missions.push(getDummyMission());
       }

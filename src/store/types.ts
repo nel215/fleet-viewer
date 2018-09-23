@@ -1,5 +1,6 @@
 import { Map, Message } from '../entity';
 import { APIShip } from '../api/ship';
+import { APIDeck } from '../api/deck';
 
 export interface QuestlistPayload {
   page: number;
@@ -17,7 +18,7 @@ export interface State {
   master: Master;
   ships: Record<number, APIShip>;
   slotitems: Object;
-  decks: Object;
+  decks: Record<number, APIDeck>;
   quests: Record<number, Quest>;
   maps: Record<number, Map>;
   message: Message;
@@ -36,17 +37,6 @@ export interface Quest {
   detail: string;
   category: QuestCategory;
   state: number; // TODO: Change to enum
-}
-
-export interface Mission {
-  id: number;
-  end: number;
-}
-
-export interface Deck {
-  id: number;
-  shipIds: Array<number>;
-  mission: Mission;
 }
 
 export interface Slotitem {
