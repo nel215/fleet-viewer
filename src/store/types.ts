@@ -1,4 +1,4 @@
-import { Map, Message } from '../entity';
+import { Map, Message, Quest } from '../entity';
 import { APIShip } from '../api/ship';
 import { APIDeck } from '../api/deck';
 import { APISlotitem, ItemType } from '../api/slot-item';
@@ -18,21 +18,6 @@ export interface State {
   quests: Record<number, Quest>;
   maps: Record<number, Map>;
   message: Message;
-}
-
-export enum QuestCategory {
-  Formation = 1,
-  Sally = 2,
-  Expedition = 4,
-}
-
-export interface Quest {
-  id: number;
-  page: number;
-  title: string;
-  detail: string;
-  category: QuestCategory;
-  state: number; // TODO: Change to enum
 }
 
 export interface MissionMaster {

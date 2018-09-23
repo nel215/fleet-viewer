@@ -1,4 +1,4 @@
-import { Quest } from '../store/types';
+import { Quest } from '../entity';
 
 export default {
   parse(body) {

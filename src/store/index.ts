@@ -1,7 +1,8 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 import actions from './actions';
-import { State, Quest } from './types';
+import { State } from './types';
+import { Quest } from '../entity';
 import getSelectedQuests from '../usecase/quest';
 import getUnclearedEventMaps from '../usecase/map';
 import APIMap from '../api/map';

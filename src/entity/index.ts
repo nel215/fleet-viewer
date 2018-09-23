@@ -41,6 +41,21 @@ export interface Ship {
   maxSpaces: Array<number>;
 }
 
+export enum QuestCategory {
+  Formation = 1,
+  Sally = 2,
+  Expedition = 4,
+}
+
+export interface Quest {
+  id: number;
+  page: number;
+  title: string;
+  detail: string;
+  category: QuestCategory;
+  state: number; // TODO: Change to enum
+}
+
 export interface Message {
   text: string;
 }

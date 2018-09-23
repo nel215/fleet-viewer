@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import { mapState } from 'vuex';
-import { State, Quest, QuestCategory } from '../store/types';
+import { State } from '../store/types';
+import { Quest, QuestCategory } from '../entity';
 
 interface QuestViewModel {
   title: string;

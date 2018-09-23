@@ -1,4 +1,4 @@
-import { Quest } from '../store/types';
+import { Quest } from '../entity';
 
 function isSelected(quest) {
   return quest.state === 2 || quest.state === 3;
