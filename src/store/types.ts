@@ -3,11 +3,6 @@ import { APIShip } from '../api/ship';
 import { APIDeck } from '../api/deck';
 import { APISlotitem, ItemType } from '../api/slot-item';
 
-export interface QuestlistPayload {
-  page: number;
-  quests: Array<Quest>;
-}
-
 export interface Master {
   ships: Object;
   slotitems: Object;
