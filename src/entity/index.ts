@@ -20,6 +20,8 @@ export interface Deck {
 
 export class Slotitem {
   name: string;
+
+  airPower: number;
 }
 
 export interface Ship {
