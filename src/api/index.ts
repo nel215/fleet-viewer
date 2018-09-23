@@ -1,12 +1,11 @@
 import URL from 'url';
 import assert from 'assert';
 import GetData from './get-data';
-import RequireInfo from './require-info';
 import Questlist from './questlist';
-import SlotItem from './slot-item';
 import Map from './map';
 import { parseShip, mergeShips } from './ship';
 import { parseDeck, mergeDecks, APIDeck } from './deck';
+import { parseSlotitem } from './slot-item';
 
 function parseBody(body) {
   assert(body.search(/^svdata=/) === 0);
@@ -26,8 +25,10 @@ export default {
       return master;
     }
     if (url.pathname === '/kcsapi/api_get_member/require_info') {
-      const payload = RequireInfo.parse(body);
-      return payload;
+      const slotitems = body.api_data.api_slot_item.map(d => parseSlotitem(d));
+      return {
+        slotitems,
+      };
     }
     if (url.pathname === '/kcsapi/api_get_member/questlist') {
       const payload = Questlist.parse(body);
@@ -39,8 +40,10 @@ export default {
       return { ships, decks };
     }
     if (url.pathname === '/kcsapi/api_get_member/slot_item') {
-      const payload = SlotItem.parse(body);
-      return payload;
+      const slotitems = body.api_data.map(d => parseSlotitem(d));
+      return {
+        slotitems,
+      };
     }
     if (url.pathname === '/kcsapi/api_get_member/ship_deck') {
       const ships = body.api_data.api_ship_data.map(d => parseShip(d));
