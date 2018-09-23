@@ -1,6 +1,7 @@
 import { Map, Message } from '../entity';
 import { APIShip } from '../api/ship';
 import { APIDeck } from '../api/deck';
+import { APISlotitem } from '../api/slot-item';
 
 export interface QuestlistPayload {
   page: number;
@@ -17,7 +18,7 @@ export interface Master {
 export interface State {
   master: Master;
   ships: Record<number, APIShip>;
-  slotitems: Object;
+  slotitems: Record<number, APISlotitem>;
   decks: Record<number, APIDeck>;
   quests: Record<number, Quest>;
   maps: Record<number, Map>;
@@ -37,14 +38,6 @@ export interface Quest {
   detail: string;
   category: QuestCategory;
   state: number; // TODO: Change to enum
-}
-
-export interface Slotitem {
-  id: number;
-  slotitemId: number;
-  locked: boolean;
-  level: number;
-  airLevel: number;
 }
 
 export interface MissionMaster {

@@ -1,9 +1,9 @@
 import uuid from 'uuid/v4';
 import Vue from 'vue';
 import { State } from '../store/types';
-import { Ship } from '../entity';
+import { Ship, Slotitem } from '../entity';
 
-interface Slotitem {
+interface SlotitemViewModel {
   id: string;
   name: String;
   shortName: String;
@@ -24,7 +24,7 @@ interface ShipViewModel {
   maxBullet: number;
   bulletPercentage: string;
   bulletColor: string;
-  slotitems: Array<Slotitem>;
+  slotitems: Array<SlotitemViewModel>;
 }
 
 function getHpColor(now, max) {
@@ -60,7 +60,7 @@ function getFuelOrBulletColor(now, max) {
 }
 
 function createDummySlotitem() {
-  const item = <Slotitem>{
+  const item = <SlotitemViewModel>{
     id: uuid(),
     name: '-',
     shortName: '-',
@@ -88,27 +88,12 @@ function createDummyShip() {
   };
 }
 
-function createSlotitemsByIds(state: State, ids) {
-  const slotitems = ids.map((id: number) => {
-    if (!(id in state.slotitems)) {
-      return createDummySlotitem();
-    }
-    const slotitem = state.slotitems[id];
-    if (slotitem.slotitemId in state.master.slotitems) {
-      const m = state.master.slotitems[slotitem.slotitemId];
-      return <Slotitem>{
-        id: uuid(),
-        name: m.name,
-        shortName: m.name.substr(0, 1),
-      };
-    }
-    return <Slotitem>{
-      id: uuid(),
-      name: 'Unknown',
-      shortName: '?',
-    };
-  });
-  return slotitems;
+function createSlotitem(s: Slotitem) {
+  return <SlotitemViewModel>{
+    id: uuid(),
+    name: s.name,
+    shortName: s.name.substr(0, 1),
+  };
 }
 
 export default Vue.extend({
@@ -128,8 +113,7 @@ export default Vue.extend({
       const hpColor = getHpColor(ship.hp, ship.maxHp);
       const fuelColor = getFuelOrBulletColor(ship.fuel, ship.maxFuel);
       const bulletColor = getFuelOrBulletColor(ship.bullet, ship.maxBullet);
-
-      const slotitems = createSlotitemsByIds(state, ship.slot);
+      const slotitems = ship.slotitems.map(d => createSlotitem(d));
 
       return <ShipViewModel>{
         name: ship.name,

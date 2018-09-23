@@ -28,7 +28,7 @@ const store = new Vuex.Store({
   getters: {
     selectedQuests: state => getSelectedQuests(state.quests),
     maps: state => APIMap.merge(state.maps, state.master.maps),
-    ships: state => API.mergeShips(state.ships, state.master.ships),
+    ships: state => API.mergeShips(state.ships, state.slotitems, state.master),
     getShipById: (state, getters) => id => getters.ships[id],
     decks: state => API.mergeDecks(state.decks, state.master),
     unclearedEventMaps: (state, getters) => getUnclearedEventMaps(getters.maps),

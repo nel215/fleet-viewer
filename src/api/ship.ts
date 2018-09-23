@@ -1,4 +1,5 @@
 import { Ship } from '../entity';
+import { APISlotitem } from './slot-item';
 
 interface ShipResponse {
   api_id: number;
@@ -40,13 +41,38 @@ export function parseShip(data: ShipResponse) {
   };
 }
 
+function mergeSlotitem(id: number, slotitems: Record<number, any>, master) {
+  if (!(id in slotitems)) {
+    return {
+      name: '-',
+    };
+  }
+  const slotitem = slotitems[id];
+  if (!(slotitem.slotitemId in master.slotitems)) {
+    return {
+      name: '?',
+    };
+  }
+  const m = master.slotitems[slotitem.slotitemId];
+  return {
+    name: m.name,
+  };
+}
+
+function mergeSlotitems(slotitemIds, slotitems: Record<number, any>, master) {
+  const res = slotitemIds.map((id: number) => mergeSlotitem(id, slotitems, master));
+  return res;
+}
+
 export function mergeShips(
   ships: Record<number, APIShip>,
-  masterShips: Record<number, any>,
+  apiSlotitems: Record<number, APISlotitem>,
+  master: any,
 ): Record<number, Ship> {
   return Object.values(ships).reduce((a, s) => {
-    if (s.shipId in masterShips) {
-      const m = masterShips[s.shipId];
+    const slotitems = mergeSlotitems(s.slot, apiSlotitems, master);
+    if (s.shipId in master.ships) {
+      const m = master.ships[s.shipId];
       const res: Ship = {
         id: s.id,
         name: m.name,
@@ -57,6 +83,7 @@ export function mergeShips(
         fuel: s.fuel,
         bullet: s.bullet,
         slot: s.slot,
+        slotitems,
         los: m.los,
         maxFuel: m.maxFuel,
         maxBullet: m.maxBullet,
@@ -74,6 +101,7 @@ export function mergeShips(
       fuel: s.fuel,
       bullet: s.bullet,
       slot: s.slot,
+      slotitems,
       los: NaN,
       maxFuel: NaN,
       maxBullet: NaN,

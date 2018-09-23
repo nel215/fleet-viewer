@@ -18,6 +18,10 @@ export interface Deck {
   mission: Mission;
 }
 
+export class Slotitem {
+  name: string;
+}
+
 export interface Ship {
   id: number;
   name: string;
@@ -29,6 +33,7 @@ export interface Ship {
   hp: number;
   maxHp: number;
   slot: Array<number>;
+  slotitems: Array<Slotitem>;
   maxFuel: number;
   maxBullet: number;
   maxSpaces: Array<number>;
