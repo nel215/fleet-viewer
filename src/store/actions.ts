@@ -58,6 +58,9 @@ export default {
     if (payload.maps !== undefined) {
       context.commit('updateMaps', payload);
     }
+    if (payload.airBases !== undefined) {
+      context.commit('updateAirBases', payload);
+    }
   },
   store(context, payload) {
     const { value } = payload;

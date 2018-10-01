@@ -2,6 +2,7 @@ import { Map, Message, Quest } from '../entity';
 import { APIShip } from '../api/ship';
 import { APIDeck } from '../api/deck';
 import { APISlotitem, ItemType } from '../api/slot-item';
+import { AirBaseResp } from '../api/air-base';
 
 export interface Master {
   ships: Object;
@@ -17,6 +18,7 @@ export interface State {
   decks: Record<number, APIDeck>;
   quests: Record<number, Quest>;
   maps: Record<number, Map>;
+  airBases: Record<number, AirBaseResp>;
   message: Message;
 }
 

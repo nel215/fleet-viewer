@@ -22,6 +22,7 @@ const store = new Vuex.Store({
     decks: {},
     quests: {},
     maps: {},
+    airBases: {},
     message: {
       text: '',
     },
@@ -72,6 +73,12 @@ const store = new Vuex.Store({
     updateMaps(state, payload) {
       payload.maps.forEach((map) => {
         Vue.set(state.maps, map.id, map);
+      });
+    },
+    updateAirBases(state, payload) {
+      payload.airBases.forEach((b) => {
+        console.log(JSON.parse(JSON.stringify(b)));
+        Vue.set(state.airBases, b.id, b.bases);
       });
     },
   },
