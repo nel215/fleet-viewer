@@ -6,6 +6,7 @@ import Map from './map';
 import { parseShip, mergeShips } from './ship';
 import { parseDeck, mergeDecks, APIDeck } from './deck';
 import { parseSlotitem } from './slot-item';
+import AirBase from './air-base';
 
 function parseBody(body) {
   assert(body.search(/^svdata=/) === 0);
@@ -68,10 +69,12 @@ export default {
       };
     }
     if (url.pathname === '/kcsapi/api_get_member/mapinfo') {
-      // TODO:
       const maps = Map.parse(body.api_data.api_map_info);
+      const airBases = AirBase.parse(body.api_data.api_air_base);
+      console.log(JSON.parse(JSON.stringify(airBases)));
       return {
         maps,
+        airBases,
       };
     }
     return {};
