@@ -39,6 +39,7 @@ export interface Ship {
   maxFuel: number;
   maxBullet: number;
   maxSpaces: Array<number>;
+  exSlotitem: Slotitem;
 }
 
 export enum QuestCategory {

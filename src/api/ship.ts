@@ -112,6 +112,7 @@ function mergeSlotitems(ship: APIShip, slotitems: Record<number, any>, master) {
 
 function mergeShip(ship, apiSlotitems, master) {
   const slotitems = mergeSlotitems(ship, apiSlotitems, master);
+  const exSlotitem = mergeSlotitem(ship.api_slot_ex, 0, apiSlotitems, master);
   if (!(ship.shipId in master.ships)) {
     const res: Ship = {
       id: ship.id,
@@ -128,6 +129,7 @@ function mergeShip(ship, apiSlotitems, master) {
       maxFuel: NaN,
       maxBullet: NaN,
       maxSpaces: [],
+      exSlotitem,
     };
     return res;
   }
@@ -147,6 +149,7 @@ function mergeShip(ship, apiSlotitems, master) {
     maxFuel: m.maxFuel,
     maxBullet: m.maxBullet,
     maxSpaces: m.maxSpaces,
+    exSlotitem,
   };
   return res;
 }
