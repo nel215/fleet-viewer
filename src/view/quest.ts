@@ -20,9 +20,9 @@ function getColor(quest: Quest): string {
     [QuestCategory.Composition]: 'teal-600',
     [QuestCategory.Sortie]: 'red-600',
     [QuestCategory.ExtraSortie]: 'red-600',
-    [QuestCategory.Exercise]: 'light_green-700',
+    [QuestCategory.Exercise]: 'green-600',
     [QuestCategory.Expedition]: 'blue-600',
-    [QuestCategory.Supply]: 'yellow-800',
+    [QuestCategory.Supply]: 'amber-800',
     [QuestCategory.Arsenal]: 'brown-600',
     [QuestCategory.Modernization]: 'purple-600',
   }[quest.category];
