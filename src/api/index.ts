@@ -5,6 +5,7 @@ import Questlist from './questlist';
 import Map from './map';
 import { parseShip, mergeShips } from './ship';
 import { parseDeck, mergeDecks, APIDeck } from './deck';
+import { parseMaster } from './master';
 import { parseSlotitem } from './slot-item';
 import AirBase from './air-base';
 
@@ -22,7 +23,7 @@ export default {
     const body = parseBody(message.body);
     console.log(body);
     if (url.pathname === '/kcsapi/api_start2/getData') {
-      const master = GetData.parse(body);
+      const master = parseMaster(body.api_data);
       return master;
     }
     if (url.pathname === '/kcsapi/api_get_member/require_info') {

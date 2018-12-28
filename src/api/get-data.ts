@@ -1,6 +1,6 @@
 import { MissionMaster, ShipMaster, SlotitemMaster } from '../store/types';
 
-function parseShips(data) {
+export function parseShips(data) {
   return data.reduce((a, d) => {
     Object.assign(a, {
       [d.api_id]: <ShipMaster>{
@@ -21,7 +21,7 @@ function getIsAirPower(d) {
   return [5, 36, 40, 43].some(t => t === d.api_type[1]);
 }
 
-function parseSlotitems(data) {
+export function parseSlotitems(data) {
   return data.reduce((a, d) => {
     const s = <SlotitemMaster>{
       id: d.api_id,
@@ -36,7 +36,7 @@ function parseSlotitems(data) {
   }, {});
 }
 
-function parseMissions(data) {
+export function parseMissions(data) {
   return data.reduce((a, d) => {
     const s = <MissionMaster>{
       id: d.api_id,
@@ -49,7 +49,7 @@ function parseMissions(data) {
   }, {});
 }
 
-function parseMap(data) {
+export function parseMap(data) {
   return data.reduce((a, d) => {
     const m = {
       id: d.api_id,
@@ -61,21 +61,9 @@ function parseMap(data) {
   }, {});
 }
 
-function parse(body) {
-  const slotitems = parseSlotitems(body.api_data.api_mst_slotitem);
-  const ships = parseShips(body.api_data.api_mst_ship);
-  const missions = parseMissions(body.api_data.api_mst_mission);
-  const maps = parseMap(body.api_data.api_mst_mapinfo);
-  return {
-    master: {
-      ships,
-      slotitems,
-      missions,
-      maps,
-    },
-  };
-}
-
 export default {
-  parse,
+  parseSlotitems,
+  parseShips,
+  parseMissions,
+  parseMap,
 };
