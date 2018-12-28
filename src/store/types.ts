@@ -38,11 +38,3 @@ export interface ShipMaster {
   maxBullet: number;
   maxSpaces: Array<number>;
 }
-
-export interface SlotitemMaster {
-  id: number;
-  name: string;
-  type: ItemType;
-  tyku: number;
-  los: number;
-}

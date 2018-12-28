@@ -1,4 +1,13 @@
-import { MissionMaster, ShipMaster, SlotitemMaster } from '../store/types';
+import { MissionMaster, ShipMaster } from '../store/types';
+import { ItemType } from './slot-item';
+
+export interface SlotitemMaster {
+  id: number;
+  name: string;
+  type: ItemType;
+  tyku: number;
+  los: number;
+}
 
 export function parseShips(data) {
   return data.reduce((a, d) => {

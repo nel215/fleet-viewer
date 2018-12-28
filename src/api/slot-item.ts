@@ -11,6 +11,7 @@ export class APISlotitem {
 }
 
 export enum ItemType {
+  Invalid = -1,
   SmallCaliberMainGun = 1,
   Fighter = 6,
   DiveBomber = 7,

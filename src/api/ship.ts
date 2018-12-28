@@ -1,5 +1,6 @@
 import { Ship, Slotitem } from '../entity';
 import { APISlotitem, ItemType } from './slot-item';
+import { getMasterSlotitem } from './master';
 
 interface ShipResponse {
   api_id: number;
@@ -93,13 +94,7 @@ function mergeSlotitem(
     };
   }
   const slotitem = slotitems[id];
-  if (!(slotitem.slotitemId in master.slotitems)) {
-    return {
-      name: '?',
-      airPower: 0,
-    };
-  }
-  const m = master.slotitems[slotitem.slotitemId];
+  const m = getMasterSlotitem(master, slotitem.slotitemId);
   const airPower = getAirPower(space, slotitem, m);
   return {
     name: m.name,
