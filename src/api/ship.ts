@@ -115,50 +115,55 @@ function mergeSlotitems(ship: APIShip, slotitems: Record<number, any>, master) {
   return res;
 }
 
-export function mergeShips(
-  ships: Record<number, APIShip>,
-  apiSlotitems: Record<number, APISlotitem>,
-  master: any,
-): Record<number, Ship> {
-  return Object.values(ships).reduce((a, s) => {
-    const slotitems = mergeSlotitems(s, apiSlotitems, master);
-    if (s.shipId in master.ships) {
-      const m = master.ships[s.shipId];
-      const res: Ship = {
-        id: s.id,
-        name: m.name,
-        lv: s.lv,
-        hp: s.hp,
-        maxHp: s.maxHp,
-        cond: s.cond,
-        fuel: s.fuel,
-        bullet: s.bullet,
-        slot: s.slot,
-        slotitems,
-        los: m.los,
-        maxFuel: m.maxFuel,
-        maxBullet: m.maxBullet,
-        maxSpaces: m.maxSpaces,
-      };
-      return Object.assign(a, { [res.id]: res });
-    }
+function mergeShip(ship, apiSlotitems, master) {
+  const slotitems = mergeSlotitems(ship, apiSlotitems, master);
+  if (!(ship.shipId in master.ships)) {
     const res: Ship = {
-      id: s.id,
+      id: ship.id,
       name: '-',
-      lv: s.lv,
-      hp: s.hp,
-      maxHp: s.maxHp,
-      cond: s.cond,
-      fuel: s.fuel,
-      bullet: s.bullet,
-      slot: s.slot,
+      lv: ship.lv,
+      hp: ship.hp,
+      maxHp: ship.maxHp,
+      cond: ship.cond,
+      fuel: ship.fuel,
+      bullet: ship.bullet,
+      slot: ship.slot,
       slotitems,
       los: NaN,
       maxFuel: NaN,
       maxBullet: NaN,
       maxSpaces: [],
     };
-    return Object.assign(a, { [res.id]: res });
+    return res;
+  }
+  const m = master.ships[ship.shipId];
+  const res: Ship = {
+    id: ship.id,
+    name: m.name,
+    lv: ship.lv,
+    hp: ship.hp,
+    maxHp: ship.maxHp,
+    cond: ship.cond,
+    fuel: ship.fuel,
+    bullet: ship.bullet,
+    slot: ship.slot,
+    slotitems,
+    los: m.los,
+    maxFuel: m.maxFuel,
+    maxBullet: m.maxBullet,
+    maxSpaces: m.maxSpaces,
+  };
+  return res;
+}
+
+export function mergeShips(
+  ships: Record<number, APIShip>,
+  apiSlotitems: Record<number, APISlotitem>,
+  master: any,
+): Record<number, Ship> {
+  return Object.values(ships).reduce((a, s) => {
+    const ship = mergeShip(s, apiSlotitems, master);
+    return Object.assign(a, { [ship.id]: ship });
   }, {});
 }
 
