@@ -25,6 +25,7 @@ interface ShipViewModel {
   bulletPercentage: string;
   bulletColor: string;
   slotitems: Array<SlotitemViewModel>;
+  exSlotitem: SlotitemViewModel;
 }
 
 function getHpColor(now, max) {
@@ -85,6 +86,7 @@ function createDummyShip() {
     bulletPercentage: '0%',
     bulletColor: getFuelOrBulletColor(0, 0),
     slotitems: [0, 0, 0, 0, 0].map(createDummySlotitem),
+    exSlotitem: createDummySlotitem(),
   };
 }
 
@@ -114,6 +116,7 @@ export default Vue.extend({
       const fuelColor = getFuelOrBulletColor(ship.fuel, ship.maxFuel);
       const bulletColor = getFuelOrBulletColor(ship.bullet, ship.maxBullet);
       const slotitems = ship.slotitems.map(d => createSlotitem(d));
+      const exSlotitem = createSlotitem(ship.exSlotitem);
 
       return <ShipViewModel>{
         name: ship.name,
@@ -131,6 +134,7 @@ export default Vue.extend({
         fuelPercentage,
         fuelColor,
         slotitems,
+        exSlotitem,
       };
     },
   },

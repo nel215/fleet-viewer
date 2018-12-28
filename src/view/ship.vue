@@ -11,6 +11,9 @@
       {{ slotitem.shortName }}
       <mdl-tooltip :target="slotitem.id">{{ slotitem.name }}</mdl-tooltip>
     </span>
+    <span class='icon' :id="ship.exSlotitem.id" >{{ ship.exSlotitem.shortName }}
+      <mdl-tooltip :target="ship.exSlotitem.id">{{ ship.exSlotitem.name }}</mdl-tooltip>
+    </span>
   </td>
 </tr>
 </template>
